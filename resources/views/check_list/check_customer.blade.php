@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Check List de Valuación</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <table class="table" style="font-size: 8px;">
+                        <td>
+                            <h2 style="font-size:  11px !important; font-weight: bold !important;">100 Puntos, Check List 
+                                <span style="font-size:  10px !important; font-weight: light !important;">de Valuación y Certificación de Unidades</span>
+                            </h2>
+                        </td>
+                        <td>
+                            <!-- <img src="{{ asset('/img/logo-text.png') }}" alt=""> -->
+                            <img src="{{ public_path('./img/logo-text.png') }}" alt="" style="width: 50%">
+                        </td>
+                    </table>
+                </div>
+
+                <div class="row">
+                    <table class="table" style="font-size: 8px;">
+                        <td>
+                            Nombre Cliente: {{ $findvin->client_sale->user->name }} {{ $findvin->client_sale->user->surname }}
+                        </td>
+                        <td>
+                            Teléfono: {{ $findvin->client_sale->phone1 }}
+                        </td>
+                        <td>
+                            Distribuidor: {{ $vin_check_list->distributor }}
+                        </td>
+                    </table>
+                </div>
+
+                <div class="row">
+                    <table  class="table" style="font-size: 8px;">
+                        <td>
+                            Fecha de valuación: {{ $vin_check_list->valuation_date }}
+                        </td>
+                        <td>
+                            VIN: {{ $findvin->vin }}
+                        </td>
+                        <td>
+                            Marca: {{ $findvin->brand->name }}
+                        </td>
+                        <td>
+                            Modelo: {{ $findvin->carmodel->name }}
+                        </td>
+                        <td>
+                            Versión: {{ $findvin->version }}
+                        </td>
+                        <td>
+                            Año: {{ $findvin->year }}
+                        </td>
+                        <!-- <td>
+                            Kms: {{ $findvin->km }}
+                        </td> -->
+                    </table>
+                </div>
+
+                <div class="row">
+                    <table class="table" style="font-size: 8px;">
+                            <tr>
+                                <td>
+                                    Kms: {{ $findvin->km }}
+                                </td>
+                                <td>
+                                    Color: {{ $vin_check_list->color }}
+                                </td>
+                                <td>
+                                    Placa: 
+                                </td>
+                                @if( $vin_check_list->plates === null )
+                                    <td> No tiene </td>
+                                @else
+                                    <td> {{ $vin_check_list->plates }}</td>
+                                @endif
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    Manual de Garantía:
+                                </td>
+                                <td> si  /  no </td>
+                                
+                                <td>
+                                    Compra Directa:
+                                </td>
+                                @if( $vin_check_list->direct_purchase === 'no')
+                                    <td> no </td>
+                                @else
+                                    <td> si </td>
+                                @endif
+                                
+                                <td>
+                                    Toma a Cuenta
+                                </td>
+                                @if( $vin_check_list->take_into_account === 'no')
+                                    <td> no </td>
+                                @else
+                                    <td> si </td>
+                                @endif
+
+                                <td>
+                                    Garantía Vigente:
+                                </td>
+                                <td> si  /  no </td>
+                            </tr>
+                    </table>
+                </div>
+
+                <div class="row">
+                    <table class="table " style="font-size: 8px;">
+                        <td>
+                            <!-- <h2 style="font-size:  11px !important; font-weight: bold !important;">VERIFICACIÓN MECANICA Y ESTÉTICA</h2> -->
+                            <h2 style="background: rgb(254, 194, 73); color: white; font-size: 9px;">REVISIÓN EXTERIOR</h2>
+                            <!-- Vehículo ha sufrido modificaciones
+                            <br> -->
+
+                            @if(($revExt->req1) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$revExt -> req1}}"></span>
+                                A) Carrocería
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($revExt->req2) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$revExt -> req2}}"></span> 
+                                B) Chasis
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($revExt->req3) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$revExt -> req3}}"></span> 
+                                C) Kits deportivos 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($revExt->req4) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$revExt -> req4}}"></span> 
+                                D) Chips de desempeño u otros 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($revExt->req5) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$revExt -> req5}}"></span>
+                                Costado derecho y alineación de puertas 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($revExt->req6) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$revExt -> req6}}"></span>
+                                Costado izquierdo y alineación de puertas 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($revExt->req7) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$revExt -> req7}}"></span>
+                                Defensa delantera (fascia, protectores, molduras, alineación, acabado)
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($revExt->req8) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$revExt -> req8}}"></span>
+                                Cofre (acabado, brisa, decoloración, granizo, pintura original, alineación) 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($revExt->req9) === 'a2')
+                                <span style="font-weight: bold !important;" class="{{$revExt -> req9}}"></span>
+                                Toldos (rieles, capote) 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($revExt->req14) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$revExt -> req14}}"></span>
+                                Defensa trasera (fascia, protectores, molduras, alineación, acabado, caja, emblemas, etc.) 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($revExt->req11) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$revExt -> req11}}"></span>
+                                Tapa de gasolina 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($revExt->req12) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$revExt -> req12}}"></span>
+                                Tapa de cajuela/caja/bedliner (acabado, brisa, decoloración, granizo, pintura original) 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($revExt->req13) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$revExt -> req13}}"></span>
+                                Cajuela (llanta de refacción, herramientas, gato, red de carga, etc.) 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($revExt->req14) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$revExt -> req14}}"></span>
+                                Rines y ruedas/cubierta de neumáticos/biseles/tapones (rasguños, picaduras) 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($revExt->req15) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$revExt -> req15}}"></span>
+                                Cristal (golpes, rasguños, picaduras, estrellado, originalidad) 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($revExt->req16) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$revExt -> req16}}"></span>
+                                Estribos (Fijos o eléctricos) 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($revExt->req17) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$revExt -> req17}}"></span>
+                                Retrovisores (Espejo, carcasa) 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($revExt->req18) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$revExt -> req18}}"></span>
+                                Antena 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($revExt->req19) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$revExt -> req19}}"></span>
+                                Sellos, gomas, empaques de puertas 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($revExt->req20) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$revExt -> req20}}"></span>
+                                Puertas/Cerraduras 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($revExt->req21) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$revExt -> req21}}"></span>
+                                Luces exteriores (DRL, bajas, altas, freno, reversa, emergencia, direccionales, espejo) 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($revExt->req22) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$revExt -> req22}}"></span>
+                                Alarma (operativos, a distancia) 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            <br>
+                            <h2 style="background: rgb(254, 194, 73); color: white; font-size: 9px; mt-2">INTERIOR</h2>
+                            
+                            @if(($revInt->iq1) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$revInt -> iq1}}"></span>
+                                Apertura remota (funcional) 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($revInt->iq2) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$revInt -> iq2}}"></span>
+                                Freno de estacionamiento 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($revInt->iq3) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$revInt -> iq3}}"></span>
+                                Asientos, anclaje de seguridad para niños 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($revInt->iq4) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$revInt -> iq4}}"></span>
+                                Cinturones 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($revInt->iq5) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$revInt -> iq5}}"></span>
+                                Cristales 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($revInt->iq6) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$revInt -> iq6}} "></span>
+                                Quemacocos (operativos, condiciones, sin entradas de agua/aire) 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($revInt->iq7) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$revInt -> iq7}}"></span>
+                                Sistema de navegación 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($revInt->iq8) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$revInt -> iq8}}"></span>
+                                Sistema de audio y dvd 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($revInt->iq9) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$revInt -> iq9}}"></span>
+                                Conectividad, revisión de usb/aux/bluetooth 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($revInt->iq9) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$revInt -> iq14}}"></span>
+                                Reloj/termómetro 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($revInt->iq11) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$revInt -> iq11}}"></span>
+                                Computadora de viaje 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($revInt->iq12) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$revInt -> iq12}}"></span>
+                                Toma corriente(s) (operativo) 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($revInt->iq13) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$revInt -> iq13}}"></span>
+                                Luces de interior (luces de mapa, plafón, puertas, tablero, etc.) 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($revInt->iq14) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$revInt -> iq14}}"></span>
+                                Desempañador trasero (operacional) 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($revInt->iq15) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$revInt -> iq15}}"></span>
+                                Panel de instrumentos (limpieza, rasgaduras, funciones) 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($revInt->iq16) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$revInt -> iq16}}"></span>
+                                Asientos traseros/reposacabezas (operación, estado, limpieza, rasgaduras) 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($revInt->iq17) === 'a2')
+                            <span style="font-weight: bold !important; " class="{{$revInt -> iq17}}"></span>
+                            Consola/tapa del compartimiento - del/tras (funcionamiento, estado)
+                            @else
+                            <span style="display: none;"></span>
+                            @endif
+                            
+                        </td>
+                        <td>
+                            <!-- <span>
+                                <h3 style="font-size:  11px !important; font-weight: bold !important; margin-top:0 !important;">Técnico: {{$tecval->name}} {{$tecval->surname}}</h3> 
+                            </span>  -->
+                            <h2 style="background: rgb(254, 194, 73); color: white; font-size: 9px; ">MECANICA Y ELECTRICA</h2>
+                            
+                            @if(($mecElec->meq1) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq1}}"></span>
+                                Escaneo de vehículo 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq2) === 'a2')
+                                Detectar códigos de motor
+                                <br>
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq2}}"></span>
+                                Sensores (sensores reversa, punto ciego, proximidad, etc.) 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq3) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq3}}"></span>
+                                Medidores/tonos de aviso 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq4) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq4}}"></span>
+                                Encendido y estabilidad motor 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq5) === 'a2')
+                                <span style="font-weight: bold !important; " class=" {{$mecElec -> meq5}}"></span>
+                                Funcionamiento del motor/desempeño/aceleración 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq6) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq6}}"></span>
+                                Transmisión automático/manual (funcionamiento correcto) 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq7) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq7}}"></span>
+                                Control de tracción (operación) 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq8) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq8}}"></span>
+                                Frenos/abs (operación, sensación pedal, función ABS) 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq9) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq9}}"></span>
+                                Dirección/alineación y balanceo (a 80 km/operación, ruidos, vibración) 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq10) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq10}}"></span>
+                                Chasis/alineación (ruido/vibración/aspereza) 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq11) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq11}}"></span>
+                                Caja de transferencia (operación, F/RWD, 4W, AWD) 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq12) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq12}}"></span>
+                                Control de crucero (aspera, aceleración, desaceleración, cancelar) 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq13) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq13}}"></span>
+                                Velocímetro/tacómetro y odómetro 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq14) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq14}}"></span>
+                                Calentador/aire acondicionado (soplador, controles, eficiencia) 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq15) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq15}}"></span>
+                                Volante de dirección telescópico y de altura 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq16) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq16}}"></span>
+                                Claxon 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq17) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq17}}"></span>
+                                Limpiaparabrisas/chisgueteros y plumas (Estado físico y funcionamiento) 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq18) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq18}}"></span>
+                                Ajustes de pedales/volante 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq19) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq19}}"></span>
+                                Inspección visual (fugas evidentes, piezas o estampas faltantes) 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq20) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq20}}"></span>
+                                Sistema de enfriamiento del motor/radiador/mangueras (fugas)
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq21) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq21}}"></span>
+                                Sistema de dirección (bomba, cremallera, columna, motor, fugas, operación)
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq22) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq22}}"></span>
+                                Sistema eléctrico (batería, alternador, arnés, cables, computadoras, etc.)
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq23) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq23}}"></span>
+                                Sistema de frenos (cilindro, bomba, booster de freno, líneas, calipers, discos)
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq24) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq24}}"></span>
+                                Sistema de encendido (marcha, bujías, bobinas, condición de enrutamiento)
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq25) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq25}} "></span>
+                                Sistema de combustible (bomba, líneas, fugas, conexiones, funcionamiento)
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq26) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq26}}"></span>
+                                Compresor a/ac (polea, correa, funcionamiento, eficiencia, controles)
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq27) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq27}}"></span>
+                                Inspección de filtros
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq28) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq28}}"></span>
+                                Inspección de mangueras
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq29) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq29}}"></span>
+                                Inspección de bandas
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq30) === 'a2')
+                                <span style="font-weight: bold !important; " class=" {{$mecElec -> meq30}}"></span>
+                                Prueba de batería
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq31) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq31}} "></span>
+                                Prueba de compresión/fugas y degradación de aceite motor
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq32) === 'a2')
+                                <span style="font-weight: bold !important; " class=" {{$mecElec -> meq32}}"></span>
+                                Verificar estado de catalizador/sensores de oxígeno/emisiones
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq33) === 'a2')
+                                <span style="font-weight: bold !important; " class=" {{$mecElec -> meq33}}"></span>
+                                Prueba de eficiencia de a/ac y carga si es necesario
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq34) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq34}}"></span>
+                                Visual (cuerpo, parte inferior del cuerpo, debajo de la carrocería)
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq35) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq35}}"></span>
+                                Marco (signos de reparación/daños)
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq36) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq36}} "></span>
+                                Sistema de escape sin daños
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            
+                            @if(($mecElec->meq37) === 'a2')
+                                Pastillas de freno, balatas (condición)
+                                <br>
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq37}} "></span>
+                                espesor > 6mm frenos disco > 2mm tambor de espesor
+                                <br>
+                                Derecha Delantera (DD) <span style="font-weight: bold !important; ">{{$mecElec -> breakedd}})</span> mm 
+                                <br>
+                                
+                                Izquierda Delantera (ID) <span style="font-weight: bold !important; ">{{$mecElec -> breakeid}})</span> mm
+                                <br>
+                                
+                                Izquierda Trasera (IT) <span style="font-weight: bold !important; ">{{$mecElec -> breakeit}})</span> mm 
+                                <br>
+                                
+                                Derecha Trasera (DT) <span style="font-weight: bold !important; ">{{$mecElec -> breakedt}})</span> mm
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq38) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq38}} "></span>
+                                Discos, pinzas, calipers tambores (condición y dimensiones, rectificar si es necesario) 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq39) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq39}}"></span>
+                                Freno hidráulico (nivel, líneas, mangueras)
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq40) === 'a2')
+                                Neumáticos.
+                                <br> 
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq40}}"></span>
+                                Profundidad 8/32 o mayor, marca, tipo, tamaño, IGUALES las 5
+                                <br>
+                                
+                                Profundidad Derecha Delantera (DD) <span style="font-weight: bold !important; ">{{$mecElec -> depthdd}})</span> mm 
+                                <br>
+                                
+                                Profundidad Izquierda Delantera (ID) <span style="font-weight: bold !important; ">{{$mecElec -> depthid}})</span> mm 
+                                <br>
+                                
+                                Profundidad Izquierda Trasera (IT) <span style="font-weight: bold !important; ">{{$mecElec -> depthit}})</span> mm 
+                                <br>
+                                
+                                Profundidad Delantera Trasera (DT) <span style="font-weight: bold !important; ">{{$mecElec -> depthdt}})</span> mm 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq41) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq41}}"></span>
+                                Ruedas de acero o aleación originales según modelo y versión 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq42) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq42}}"></span>
+                                Amortiguadores (operación, fugas, etc.) 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq43) === 'a2')
+                                <span style="font-weight: bold !important;  " class="{{$mecElec -> meq43}}"></span>
+                                Resorte/barras estabilizadoras. 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq44) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq44}}"></span>
+                                Soportes motor/caja/escape (condición, montaje, bujes) 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq45) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq45}} "></span>
+                                Dirección/enlace (la barra de dirección/terminales, la articulación) 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq46) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq46}} "></span>
+                                Compartimiento del motor (acabado, el aislamiento, las calcomanías) 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq47) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq47}}"></span>
+                                Motor (condición, funcionamiento, sin fugas ni golpes) 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq48) === 'a2')
+                                <span style="font-weight: bold !important; " class=" {{$mecElec -> meq48}}"></span>
+                                Transmisión (condición, funcionamiento, sin fugas ni golpes) 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq49) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq49}}"></span>
+                                Caja de transferencia (condición, funcionamiento, sin fugas ni golpes) 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq50) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$mecElec -> meq50}}"></span>
+                                Montaje, ejes (condición, funcionamiento, sin fugas y golpes) 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($mecElec->meq51) === 'a2')
+                                <span style="font-weight: bold !important; " class=" {{$mecElec -> meq51}}"></span>
+                                Diferencial (condición, funcionamiento, sin fugas y golpes)
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+
+                        </td>
+                    </table>
+                </div>
+
+                <div class="row">
+                    <table class="table " style="font-size: 8px;">
+                        <td>
+                            <h2 style="background: rgb(254, 194, 73); color: white; font-size: 9px;">CERTIFICACIÓN DE VEHÍCULO</h2>
+                            
+                            @if(($cert -> cvq1) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$cert -> cvq1}}"></span>
+                                Manual de propietario 
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($cert -> cvq2) === 'a2')
+                                <span style="font-weight: bold !important; " class=" {{$cert -> cvq2}}"></span>
+                                Campañas abiertas
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($cert -> cvq3) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$cert -> cvq3}}  "></span> 
+                                El vehículo es certificable
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($cert -> cvq4) === 'a2')
+                                <span style="font-weight: bold !important; " class=" {{$cert -> cvq4}}"></span>
+                                Fecha de último mantenimiento
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($cert -> cvq5) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$cert -> cvq5}} "></span>
+                                Detallado exterior e interior
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($cert -> cvq6) === 'a2')
+                                <span style="font-weight: bold !important; " class=" {{$cert -> cvq6}}"></span>
+                                Documentación completa
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($cert -> cvq7) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$cert -> cvq7}} "></span>
+                                Prueba de estado de salud de la batería
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($cert -> cvq8) === 'a2')
+                                <span style="font-weight: bold !important; " class=" {{$cert -> cvq8}}"></span>
+                                Realizar campañas abiertas
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($cert -> cvq9) === 'a2')
+                                <span style="font-weight: bold !important; " class="{{$cert -> cvq9}}"></span>
+                                Cambio de aceite de motor y filtro (monitor reestablecer la vida del aceite)
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($cert -> cvq11) === 'a2')
+                                <span style="font-weight: bold !important; " class=" {{$cert -> cvq11}}"></span>
+                                Inspeccionar/cambiar filtros (de acerdo al programa del fabricante)
+                                <br>
+                            @else
+                                <span style="display: none;"></span>
+                            @endif
+                            
+                            @if(($cert -> cvq12) === 'a2')
+                            <span style="font-weight: bold !important; " class=" {{$cert -> cvq12}}"></span>
+                            Inspeccionar y poner a nivel todos los fluídos
+                            <br>
+                            <br>
+                            @else
+                            <span style="display: none;"></span>
+                            @endif
+                            <br>
+                            
+                            <span style="font-weight: bold !important;  "></span>CÓDIGOS DE REFERENCIA:</span>
+                            <br>
+                            
+                            <span style="font-weight: bold !important;">
+                                <!-- <span class="a1"> </span> 
+                                Inspección Realizada -->
+                                <span class="a2"> </span>
+                                Requiere Servicio
+                                <!-- <span class="a3"> </span> 
+                                N/A -->
+                            </span>
+                        </td>
+                        <td>
+                        </td>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <table class="table " style="font-size: 8px;">
+ 
+                        <!-- <tbody>
+                            <tr> -->
+                                <td>
+                                    
+                                    <h3 style="font-size:  11px !important; font-weight: bold !important; margin-top:0 !important;">
+                                        COTIZACIÓN
+                                    </h3> 
+                                    
+                                    <!-- <span style="font-size:  10px !important; font-weight: bold !important;  ">Referencia libro:</span>
+                                    <br> 
+
+                                    <span style="font-weight: bold !important;  "></span>Toma: $ {{ $vin_check_list->take }}</span>
+                                    <br>
+                                    
+                                    <span style="font-weight: bold !important;  "></span>Venta: $ {{ $vin_check_list->sale }}</span>
+                                    <br>
+
+                                    <span style="font-size:  10px !important; font-weight: bold !important;  ">Referencia intelimotors:</span>
+                                    <br>
+
+                                    <span style="font-weight: bold !important;  "></span>Baja: $ {{ $vin_check_list->take_intelimotors }}</span>
+                                    <br>
+                                    
+                                    <span style="font-weight: bold !important;  "></span>Alta: $ {{ $vin_check_list->sale_intelimotors }}</span> 
+                                    <br>-->
+                                    <span style="font-size:  10px !important; font-weight: bold !important;  ">Reacondicionamiento:</span>
+                                    <br> 
+                                    <br> 
+
+                                    <span style="font-size:  10px !important; font-weight: bold !important;  ">Desglose Mano de obra: </span>
+                                    <br>
+                                    <br>
+
+                                    <table style="font-size: 8px;">
+                                        <tr>
+                                            <td>Nom Refacción</td>
+                                            <td>Horas</td>
+                                            <td>Total</td>
+                                        </tr>
+                                        @foreach($sparePart as $workforce)
+                                            <tr>
+                                                <td>{{ $workforce->name }}</td>
+                                                <td>{{ $workforce->hours }}</td>
+                                                <td>{{ $workforce->hours * 45 }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </table>
+
+                                    <!-- @foreach($sparePart as $workforce)
+                                        <span style="font-weight: bold !important;  "></span>{{ $workforce->name }}, Horas: {{ $workforce->hours}} = {{ $workforce->hours * 45  }}</span>
+                                        <br>
+                                    @endforeach -->
+                                    <span style="font-weight: bold !important;  ">Total Mano de obra: $ {{ $vin_check_list->workforce }}</span>
+                                    <br>
+                                    <br>
+                                    
+                                    <span style="font-size:  10px !important; font-weight: bold !important;  ">Desglose Partes/refacciones: </span>
+                                    <br>
+                                    <br>
+
+                                    <table style="font-size: 8px;">
+                                        <tr>
+                                            <td>Nom Refacción</td>
+                                            <td>Precio</td>
+                                        </tr>
+                                        @foreach($sparePart as $spare)
+                                            <tr>
+                                                <td>{{ $spare->name }}</td>
+                                                <td>{{ $spare->priceOriginal }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </table>
+                                    
+                                    <!-- @foreach($sparePart as $spare)
+                                        <span style="font-weight: bold !important;  "></span>{{ $spare->name }}, Precio: $ {{ $spare->priceOriginal }}</span>
+                                        <br>
+                                    @endforeach -->
+                                    <span style="font-weight: bold !important;  ">Total Partes/refacciones: $ {{ $vin_check_list->spare_parts }}</span>
+                                    <br>
+                                    <br>
+                                    
+                                    <span style="font-weight: bold !important;  ">HyP: $ {{ $vin_check_list->hyp }}</span>
+                                    <br>
+                                    <br>
+                                    
+                                    <span style="font-weight: bold !important;  ">Total: $ {{ $vin_check_list->total }}</span>
+                                    <br>
+                                    <br>
+                                    <span style="font-size:  10px !important; font-weight: bold !important;  ">Oferta Final:</span>
+                                    <br>
+                                    <!-- <span style="font-weight: bold !important;  "></span>Valor toma: $ {{ $vin_check_list->take_value }}</span>
+                                    <br> -->
+                                    
+                                    <span style="font-weight: bold !important;  ">Oferta final: $ {{ $vin_check_list->final_offer }}</span>
+                                    <br>
+                                </td>
+
+                                <td>
+                                    <span style="font-size:  10px !important; font-weight: bold !important;  ">COMENTARIOS:</span>
+                                    <br> 
+
+                                    <!-- <span style="font-weight: bold !important;  "></span>{{ $revExt->commentary }}</span> -->
+                                    <span style="font-weight: bold !important;  "></span>{{ $mecElec->commentaryMechanical }}</span>
+                                    <br>
+                                    <span style="font-weight: bold !important;  "></span>{{ $revExt->commentary }}</span>
+                                    <br>
+                                    <span style="font-weight: bold !important;  "></span>{{ $vin_check_list->comments }}</span>
+                                    <br>
+                                </td>
+                            <!-- </tr>
+
+                        </tbody> -->
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <table class="table " style="font-size: 8px;">
+                <td>
+                    <br>    
+                    <br>    
+                    <br>    
+                    <span style="font-size:  10px !important; font-weight: bold !important;  ">__________________________________</span>
+                    <br>
+                    
+                    <span style="font-size:  10px !important; font-weight: bold !important;  ">TECNICO CERTIFICADO POR GM</span>
+                    <br>
+                    
+                </td>
+                
+                <td>
+                    <br>
+                    <br>
+                    <br>
+                    <span style="font-size:  10px !important; font-weight: bold !important;  ">_______________________________</span>
+                    <br>
+                    
+                    <span style="font-size:  10px !important; font-weight: bold !important;  ">GERENTE DE SEMINUEVOS</span>
+                    <br>
+                </td>
+                
+                <td>
+                    <br>
+                    <br>
+                    <br>
+                    <span style="font-size:  10px !important; font-weight: bold !important;  ">_______________________________</span>
+                    <br>
+                    
+                    <span style="font-size:  10px !important; font-weight: bold !important;  ">VALUADOR - COMPRADOR</span>
+                    <br>
+                </td>
+            </table>
+        </div>
+
+    </div>
+</body>
+
+</html>
+
+<style>
+    .a2:after {
+        font-weight: bold !important;
+        color: red;
+        content: 'x';
+    }
+
+    .a1:after {
+        font-weight: bold !important;
+        color: green;
+        content: '✓'
+    }
+
+    .a3:after {
+        font-weight: bold !important;
+        color: gray;
+        content: 'n/a'
+    }
+
+    .bb {
+
+        border-top-style: solid;
+        border-top-color: gray;
+    }
+
+    body {
+        font-family: DejaVu Sans, sans-serif;
+    }
+
+</style>
