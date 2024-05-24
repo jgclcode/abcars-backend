@@ -72,10 +72,11 @@ class Sheet_quoteController extends Controller
                     'buyType'           => $request->buyType,
                     'clientPriceOffer'  => $request->clientPriceOffer,
                     'fecha'   => date_format(date_create(), "d-m-y H:i:s"), 
-                    'cuandoDeseaEstrenar'  => $request->wantRelease,
-                    'inversionInicial'  => $request->initialCredit,
-                    'situacionProfesional'  => $request->WhatsCurrentProfessionalSituation,
-                    'commentarioLead'  => $request->commentaryLead
+                    'nombreProspecto'  => $request->prospectorName,
+                    'apellidosProspecto'  => $request->prospectorSurname,
+                    'lugarDeProspección'  => $request->placeProspection,
+                    'commentarioProspecto'  => $request->commentaryLead,
+                    'siguienteAccion'  => $request->next
                 );
                 // dd($request->body, $request->brand, $request->model,
                 // $request->name, $request->surname, $request->email,
