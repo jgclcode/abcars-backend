@@ -125,8 +125,7 @@ class Sell_your_carController extends Controller
         $jwtAuth = new \App\Helpers\JwtAuth();
         $checkToken = $jwtAuth->checkToken($token);
 
-        // if (is_array($request->all()) && $checkToken) {
-        if (is_array($request->all())) {
+        if (is_array($request->all()) && $checkToken) {
             
             $rules = [
                 'version' => 'string',
