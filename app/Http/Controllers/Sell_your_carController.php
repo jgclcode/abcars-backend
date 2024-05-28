@@ -122,8 +122,12 @@ class Sell_your_carController extends Controller
     {
         // Comprobar si el usuario esta identificado
         $token = $request->header('Authorization');
+        \Log::info('Token recibido: ' . $token);
+
         $jwtAuth = new \App\Helpers\JwtAuth();
         $checkToken = $jwtAuth->checkToken($token);
+
+       \Log::info('Token válido: ' . json_encode($checkToken)); 
 
         if (is_array($request->all()) && $checkToken) {
             
