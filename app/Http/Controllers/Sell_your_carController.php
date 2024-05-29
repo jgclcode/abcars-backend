@@ -122,21 +122,9 @@ class Sell_your_carController extends Controller
     {
         // Comprobar si el usuario esta identificado
         $token = $request->header('Authorization');
-        \Log::info('Token recibido: ' . $token);
-
-        // if (strpos($token, 'Bearer ') !== false) {
-        //     $token = substr($token, 7); // Remover 'Bearer '
-        // } else {
-        //     \Log::info('Formato de token inválido');
-        //     return response()->json(['error' => 'Formato de token inválido'], 401);
-        // }
-
-        \Log::info('Token extraído: ' . $token);
 
         $jwtAuth = new \App\Helpers\JwtAuth();
         $checkToken = $jwtAuth->checkToken($token);
-
-       \Log::info('Token válido: ' . json_encode($checkToken)); 
 
         if (!$checkToken) {
             return response()->json(['error' => 'Token inválido o expirado'], 401);
