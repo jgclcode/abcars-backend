@@ -122,6 +122,7 @@ class Sell_your_carController extends Controller
     {
         // Comprobar si el usuario esta identificado
         $token = $request->header('Authorization');
+        dd($request);
         \Log::info('Token recibido: ' . $token);
 
         // if (strpos($token, 'Bearer ') !== false) {
