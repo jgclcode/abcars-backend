@@ -107,11 +107,11 @@ class JwtAuth{
   public function checkToken( $jwt, $getIdentity = false ){
     $auth = false;
     try{
-      \Log::info('Token antes de limpiar: ' . $jwt);
+      // \Log::info('Token antes de limpiar: ' . $jwt);
       $jwt = str_replace('"', '', $jwt);
-      \Log::info('Token después de limpiar: ' . $jwt);
+      \Log::info('Token después de limpiar comillas: ' . $jwt);
       $decoded = JWT::decode($jwt, $this->key, ['HS256']);
-      \Log::info('Token decodificado: ' . json_encode($decoded));
+      // \Log::info('Token decodificado: ' . json_encode($decoded));
     }catch(\UnexpectedValueException $e){
       \Log::error('UnexpectedValueException: ' . $e->getMessage());
       $auth = false;
