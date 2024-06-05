@@ -52,6 +52,7 @@ class ImageHelper {
 
         if($quality == false){
             $compressedImageURL = cloudinary()->upload($image->getRealPath(), [
+                'public_id' => $name,
                 'folder' => 'uploads',
                 'transformation' => [
                     'quality' => 'auto',
@@ -62,6 +63,7 @@ class ImageHelper {
         } else {
             
             $compressedImageURL = cloudinary()->upload($image->getRealPath(), [
+                'public_id' => $name,
                 'folder' => 'uploads',
                 'quality' => $quality,
             ])->getSecurePath();
