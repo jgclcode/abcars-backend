@@ -50,11 +50,11 @@ Route::get('/user/{id}', [App\Http\Controllers\UserController::class, 'getUser']
 Route::get('/userById/{id}', [App\Http\Controllers\UserController::class, 'userById']);
 Route::get('/sellerById/{id}', [App\Http\Controllers\UserController::class, 'sellerById']);
 Route::get('/user/email/{email}', [App\Http\Controllers\UserController::class, 'getUserByEmail']);
-Route::post('/user/update/{id}', [App\Http\Controllers\UserController::class, 'update']);
-Route::put('/user/updateUserAndClient/{id}', [App\Http\Controllers\UserController::class, 'updateUserAndClient']);
-Route::post('/user/createUserAndClient', [App\Http\Controllers\UserController::class, 'createUserAndClient']);
-Route::delete('user/delete/{id}', [App\Http\Controllers\UserController::class, 'destroy']);
-Route::delete('user/deleteUserAndClient/{id}', [App\Http\Controllers\UserController::class, 'deleteUserAndClient']);
+// Route::post('/user/update/{id}', [App\Http\Controllers\UserController::class, 'update']);
+// Route::put('/user/updateUserAndClient/{id}', [App\Http\Controllers\UserController::class, 'updateUserAndClient']);
+// Route::post('/user/createUserAndClient', [App\Http\Controllers\UserController::class, 'createUserAndClient']);
+// Route::delete('user/delete/{id}', [App\Http\Controllers\UserController::class, 'destroy']);
+// Route::delete('user/deleteUserAndClient/{id}', [App\Http\Controllers\UserController::class, 'deleteUserAndClient']);
 Route::get('getUsersWithoutClient/{client_id?}', [App\Http\Controllers\UserController::class, 'getUsersWithoutClient']);
 
 Route::post('user/image/{id}', [App\Http\Controllers\UserController::class, 'setImage']);
