@@ -25,6 +25,11 @@ class UserController extends Controller
     }
 
     public function register(Request $request){
+      // Comprobar si el usuario esta identificado
+      $token = $request->header('Authorization');
+      $jwtAuth = new \App\Helpers\JwtAuth();
+      $checkToken = $jwtAuth->checkToken($token);
+
       if (!is_array($request->all())) {
         $data = array(
           'status' => 'error',
@@ -33,78 +38,90 @@ class UserController extends Controller
         );
       }
 
-      $rules = [
-        'name'      => 'required|max:255|string',
-        'surname'   => 'required|max:255|string',            
-        'email'     => 'required|email|unique:users',
-        'picture'   => 'File',            
-        'gender'    => 'required|in:m,f',                        
-      ];
-      
-      try {
-        $validator = \Validator::make($request->all(), $rules);
-        if ($validator->fails()) {
-          // Esta condición se ejecuta si la validación de uno o más campos es incorrecta
+      // dd($token, $checkToken);
+
+      if ( is_array($request->all()) && $checkToken) {
+        # code...
+        $rules = [
+          'name'      => 'required|max:255|string',
+          'surname'   => 'required|max:255|string',            
+          'email'     => 'required|email|unique:users',
+          'picture'   => 'File',            
+          'gender'    => 'required|in:m,f',                        
+        ];
+        
+        try {
+          $validator = \Validator::make($request->all(), $rules);
+          if ($validator->fails()) {
+            // Esta condición se ejecuta si la validación de uno o más campos es incorrecta
+            $data = array(
+              'status' => 'error',
+              'code'   => '200',
+              'errors'  => $validator->errors()->all()
+            );
+          }else{
+            // Validación pasada correctamente                                           
+  
+            // Cifrar la contraseña
+            if( $request->password ){
+              $real_password = $request->password;                              
+            }else{
+              $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz';              
+              $real_password = substr(str_shuffle($permitted_chars), 0, 10);
+            }
+  
+            $pwd = hash('sha256', $real_password);
+            
+            // Crear el usuario
+            $user = new User();
+            $user->name = ucwords(strtolower($request->name));
+            $user->surname = ucwords(strtolower($request->surname));           
+            $user->email = $request->email;
+            $user->gender = $request->gender;
+            $user->password = $pwd;
+            
+            $user->assignRole('client');                
+  
+            //////////////////////////////////////////// 
+            // Verificar si existe la carpeta vehicles
+            $nombre_directorio = 'users';
+            $directorio = storage_path() . '/app/' . $nombre_directorio;
+            if (!file_exists($directorio)) {                
+                mkdir($directorio, 0777, true);
+            }
+            // Fin verificar si existe la carpeta vehicles                             
+            $image = $request->file('picture');
+            if( is_object( $image ) && !empty( $image )){
+                $nombre = \ImageHelper::upload($image, $directorio);
+                $user->picture = $nombre;
+            }                            
+            ////////////////////////////////////////////
+            $user->save();  
+            //Enviar email
+            // \EmailHelper::sendEmail($request->email, $real_password, $user->name, $user->surname);
+            
+            $data = array(
+                'status' => 'success',
+                'code'   => '200',
+                'message' => 'El usuario se ha creado correctamente',
+                'user' => $user
+            );
+          }
+        } catch (Exception $e) {
           $data = array(
             'status' => 'error',
             'code'   => '200',
-            'errors'  => $validator->errors()->all()
-          );
-        }else{
-          // Validación pasada correctamente                                           
-
-          // Cifrar la contraseña
-          if( $request->password ){
-            $real_password = $request->password;                              
-          }else{
-            $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz';              
-            $real_password = substr(str_shuffle($permitted_chars), 0, 10);
-          }
-
-          $pwd = hash('sha256', $real_password);
-          
-          // Crear el usuario
-          $user = new User();
-          $user->name = ucwords(strtolower($request->name));
-          $user->surname = ucwords(strtolower($request->surname));           
-          $user->email = $request->email;
-          $user->gender = $request->gender;
-          $user->password = $pwd;
-          
-          $user->assignRole('client');                
-
-          //////////////////////////////////////////// 
-          // Verificar si existe la carpeta vehicles
-          $nombre_directorio = 'users';
-          $directorio = storage_path() . '/app/' . $nombre_directorio;
-          if (!file_exists($directorio)) {                
-              mkdir($directorio, 0777, true);
-          }
-          // Fin verificar si existe la carpeta vehicles                             
-          $image = $request->file('picture');
-          if( is_object( $image ) && !empty( $image )){
-              $nombre = \ImageHelper::upload($image, $directorio);
-              $user->picture = $nombre;
-          }                            
-          ////////////////////////////////////////////
-          $user->save();  
-          //Enviar email
-          // \EmailHelper::sendEmail($request->email, $real_password, $user->name, $user->surname);
-          
-          $data = array(
-              'status' => 'success',
-              'code'   => '200',
-              'message' => 'El usuario se ha creado correctamente',
-              'user' => $user
+            'message' => 'Los datos enviados no son correctos, ' . $e
           );
         }
-      } catch (Exception $e) {
+      }else{
         $data = array(
           'status' => 'error',
           'code'   => '200',
-          'message' => 'Los datos enviados no son correctos, ' . $e
+          'message' => 'El usuario no está identificado'
         );
       }
+
   
       return response()->json($data, $data['code']);
     }

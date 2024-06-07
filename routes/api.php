@@ -41,7 +41,7 @@ Route::post('deleteImagesToExternalWebSite', [App\Http\Controllers\Vehicle_Image
 Route::post('changeOrder', [App\Http\Controllers\Vehicle_ImageController::class, 'changeOrder']);
 
 Route::get('/users/{total?}', [App\Http\Controllers\UserController::class, 'index']);
-// Route::post('/register', [App\Http\Controllers\UserController::class, 'register']);
+Route::post('/register', [App\Http\Controllers\UserController::class, 'register']);
 Route::post('/login', [App\Http\Controllers\UserController::class, 'login']);
 Route::post('/newLogin', [App\Http\Controllers\UserController::class, 'newLogin']);
 // Route::post('/recoverAccount', [App\Http\Controllers\UserController::class, 'recoverAccount']);
