@@ -278,16 +278,16 @@ Route::get('/getRecommendedCarsByVin/{vin}', [App\Http\Controllers\VehicleContro
 Route::get('choices/{user_id}', [App\Http\Controllers\ChoiceController::class, 'getChoices']);
 
 // Servicio para verificar el auto apartado
-Route::get('apartado/{vin}', [App\Http\Controllers\ChoiceController::class, 'getApartado']);
+// Route::get('apartado/{vin}', [App\Http\Controllers\ChoiceController::class, 'getApartado']);
 
-Route::get('apartar_y_desapartar/{vin}', [App\Http\Controllers\ChoiceController::class, 'apartar_y_desapartar']);
+// Route::get('apartar_y_desapartar/{vin}', [App\Http\Controllers\ChoiceController::class, 'apartar_y_desapartar']);
 
 // servicio para choices
-Route::resource('choices', App\Http\Controllers\ChoiceController::class, [
-    'only' => ['index','store','update','destroy']
-]);
-Route::get('choices/client/{user_id}', [App\Http\Controllers\ChoiceController::class, 'getChoicesByClient']);
-Route::get('getchoices', [App\Http\Controllers\ChoiceController::class, 'getChoicesWithUser']);
+// Route::resource('choices', App\Http\Controllers\ChoiceController::class, [
+//     'only' => ['index','store','update','destroy']
+// ]);
+// Route::get('choices/client/{user_id}', [App\Http\Controllers\ChoiceController::class, 'getChoicesByClient']);
+// Route::get('getchoices', [App\Http\Controllers\ChoiceController::class, 'getChoicesWithUser']);
 
 // servicio para requests
 Route::resource('request', App\Http\Controllers\RequestController::class, [
@@ -619,13 +619,13 @@ Route::get('get_valuators', [App\Http\Controllers\ValuatoresController::class, '
 
 Route::post('changeOrderShieldImages', [App\Http\Controllers\ShieldController::class, 'changeOrderShieldImages']);
 
-Route::resource('vehicle_360_image', App\Http\Controllers\Vehicle_360_imageController::class, [
-    'only' => ['index','store','update','destroy']
-]);
+// Route::resource('vehicle_360_image', App\Http\Controllers\Vehicle_360_imageController::class, [
+//     'only' => ['index','store','update','destroy']
+// ]);
 
-Route::post('upload360Images', [App\Http\Controllers\Vehicle_360_imageController::class, 'upload360Images']);
-Route::post('delete360Images', [App\Http\Controllers\Vehicle_360_imageController::class, 'delete360Images']);
-Route::get('image_360_vehicle/{name}', [App\Http\Controllers\Vehicle_360_imageController::class, 'getImage']);
+// Route::post('upload360Images', [App\Http\Controllers\Vehicle_360_imageController::class, 'upload360Images']);
+// Route::post('delete360Images', [App\Http\Controllers\Vehicle_360_imageController::class, 'delete360Images']);
+// Route::get('image_360_vehicle/{name}', [App\Http\Controllers\Vehicle_360_imageController::class, 'getImage']);
 
 Route::get('get_client_price_offer', [App\Http\Controllers\Sheet_quoteController::class, 'get_client_price_offer']);
 
