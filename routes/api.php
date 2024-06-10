@@ -33,6 +33,8 @@ Route::get('getMinMaxPrices', [App\Http\Controllers\VehicleController::class, 'm
 
 Route::get('/vehiclesSearch/{cantidad}/{brandNames?}/{modelNames?}/{years?}/{carrocerias?}/{price?}/{word?}/{orden?}/{states?}/{transmissions?}', [App\Http\Controllers\VehicleController::class, 'vehiclesSearch']);
 
+Route::get('image_vehicle/{name}', [App\Http\Controllers\Vehicle_ImageController::class, 'getImage']);
+
 
 Route::middleware(['check.ip'])->group(function () {
 
@@ -51,7 +53,6 @@ Route::middleware(['check.ip'])->group(function () {
     ]);
 
     // Ruta para obtner imagenes de vehículos
-    Route::get('image_vehicle/{name}', [App\Http\Controllers\Vehicle_ImageController::class, 'getImage']);
     Route::post('setImageWithoutFile', [App\Http\Controllers\Vehicle_ImageController::class, 'setImageWithoutFile']);
     Route::post('deleteImagesToExternalWebSite', [App\Http\Controllers\Vehicle_ImageController::class, 'deleteImagesToExternalWebSite']);
     Route::post('changeOrder', [App\Http\Controllers\Vehicle_ImageController::class, 'changeOrder']);
