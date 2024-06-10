@@ -45,6 +45,20 @@ Route::resource('states', App\Http\Controllers\StateController::class, [
     'only' => ['index']
 ]);
 
+Route::resource('sheet_quote', App\Http\Controllers\Sheet_quoteController::class, [
+        'only' => ['store']
+    ]);
+
+// servicio para requests
+Route::resource('request', App\Http\Controllers\RequestController::class, [
+    'only' => ['store','update','destroy']
+]);
+
+// servicio para notification financing
+Route::resource('financing', App\Http\Controllers\FinancingController::class, [
+    'only' => ['store']
+]);
+
 Route::middleware(['check.ip'])->group(function () {
 
     Route::get('/vehiclesSearchAll/{cantidad}/{brandNames?}/{modelNames?}/{years?}/{carrocerias?}/{price?}/{word?}/{orden?}/{states?}', [App\Http\Controllers\VehicleController::class, 'vehiclesSearchAll']);
@@ -310,11 +324,6 @@ Route::middleware(['check.ip'])->group(function () {
     Route::get('choices/client/{user_id}', [App\Http\Controllers\ChoiceController::class, 'getChoicesByClient']);
     Route::get('getchoices', [App\Http\Controllers\ChoiceController::class, 'getChoicesWithUser']);
 
-    // servicio para requests
-    Route::resource('request', App\Http\Controllers\RequestController::class, [
-        'only' => ['index','store','update','destroy']
-    ]);
-
     // servicio para logs
     Route::resource('logs', App\Http\Controllers\LogsController::class, [
         'only' => ['index','store','update','destroy']
@@ -335,10 +344,6 @@ Route::middleware(['check.ip'])->group(function () {
         'only' => ['index','store','update','destroy']
     ]);
 
-    // servicio para notification financing
-    Route::resource('financing', App\Http\Controllers\FinancingController::class, [
-        'only' => ['index','store','update','destroy']
-    ]);
     Route::get('financing/by/user/{user_id}', [App\Http\Controllers\FinancingController::class, 'financingsbyUser']);
     Route::post('financing/files/{financing_id}', [App\Http\Controllers\FinancingController::class, 'uploadFilesFinancing']);
     Route::post('financing/files/preview/{financing_id}', [App\Http\Controllers\FinancingController::class, 'previewFilesFinancing']);
@@ -590,10 +595,6 @@ Route::middleware(['check.ip'])->group(function () {
         'only' => ['index','store','update','destroy']
     ]);
     Route::get('feedVehiclesToBusinessPro', [App\Http\Controllers\BusinessProController::class, 'getVehiclesToBusinessPro']);
-
-    Route::resource('sheet_quote', App\Http\Controllers\Sheet_quoteController::class, [
-        'only' => ['index', 'store', 'update', 'destroy']
-    ]);
 
     //ckeck_vehicles
     Route::resource('/Ckeckvehicles', App\Http\Controllers\Ckeck_vehicleController::class,[
