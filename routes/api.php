@@ -39,6 +39,7 @@ Route::get('/vehicleByVin/{vin}', [App\Http\Controllers\VehicleController::class
 
 Route::get('/getRecommendedCarsByVin/{vin}', [App\Http\Controllers\VehicleController::class, 'getRecommendedCarsByVin']);
 
+Route::get('brands', [App\Http\Controllers\BrandController::class, 'allBrands']);
 
 
 
@@ -102,7 +103,6 @@ Route::middleware(['check.ip'])->group(function () {
     Route::get('/getBrandsWithTotal/{total?}', [App\Http\Controllers\BrandController::class, 'getBrandsWithTotal']);
 
     // Get All Brands
-    Route::get('brands', [App\Http\Controllers\BrandController::class, 'allBrands']);
     Route::get('brandByName/{name}', [App\Http\Controllers\BrandController::class, 'brandByName']);
     Route::get('getBrandById/{brand_id}', [App\Http\Controllers\BrandController::class, 'getBrandById']);
 
