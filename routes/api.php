@@ -31,11 +31,12 @@ Route::get('/transmissionsByActiveVehicles/{brandNames?}/{modelNames?}/{carrocer
 
 Route::get('getMinMaxPrices', [App\Http\Controllers\VehicleController::class, 'minMaxPrices']);
 
+Route::get('/vehiclesSearch/{cantidad}/{brandNames?}/{modelNames?}/{years?}/{carrocerias?}/{price?}/{word?}/{orden?}/{states?}/{transmissions?}', [App\Http\Controllers\VehicleController::class, 'vehiclesSearch']);
+
+
 Route::middleware(['check.ip'])->group(function () {
 
     Route::get('/vehicleByVin/{vin}', [App\Http\Controllers\VehicleController::class, 'vehiclesByVin']);
-
-    Route::get('/vehiclesSearch/{cantidad}/{brandNames?}/{modelNames?}/{years?}/{carrocerias?}/{price?}/{word?}/{orden?}/{states?}/{transmissions?}', [App\Http\Controllers\VehicleController::class, 'vehiclesSearch']);
 
     Route::get('/vehiclesSearchAll/{cantidad}/{brandNames?}/{modelNames?}/{years?}/{carrocerias?}/{price?}/{word?}/{orden?}/{states?}', [App\Http\Controllers\VehicleController::class, 'vehiclesSearchAll']);
 
