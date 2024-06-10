@@ -44,17 +44,17 @@ Route::get('/users/{total?}', [App\Http\Controllers\UserController::class, 'inde
 Route::post('/register', [App\Http\Controllers\UserController::class, 'register']);
 Route::post('/login', [App\Http\Controllers\UserController::class, 'login']);
 Route::post('/newLogin', [App\Http\Controllers\UserController::class, 'newLogin']);
-// Route::post('/recoverAccount', [App\Http\Controllers\UserController::class, 'recoverAccount']);
-// Route::put('/resetPassword', [App\Http\Controllers\UserController::class, 'resetPassword']);
+Route::post('/recoverAccount', [App\Http\Controllers\UserController::class, 'recoverAccount']);
+Route::put('/resetPassword', [App\Http\Controllers\UserController::class, 'resetPassword']);
 Route::get('/user/{id}', [App\Http\Controllers\UserController::class, 'getUser']);
 Route::get('/userById/{id}', [App\Http\Controllers\UserController::class, 'userById']);
 Route::get('/sellerById/{id}', [App\Http\Controllers\UserController::class, 'sellerById']);
 Route::get('/user/email/{email}', [App\Http\Controllers\UserController::class, 'getUserByEmail']);
-// Route::post('/user/update/{id}', [App\Http\Controllers\UserController::class, 'update']);
-// Route::put('/user/updateUserAndClient/{id}', [App\Http\Controllers\UserController::class, 'updateUserAndClient']);
-// Route::post('/user/createUserAndClient', [App\Http\Controllers\UserController::class, 'createUserAndClient']);
-// Route::delete('user/delete/{id}', [App\Http\Controllers\UserController::class, 'destroy']);
-// Route::delete('user/deleteUserAndClient/{id}', [App\Http\Controllers\UserController::class, 'deleteUserAndClient']);
+Route::post('/user/update/{id}', [App\Http\Controllers\UserController::class, 'update']);
+Route::put('/user/updateUserAndClient/{id}', [App\Http\Controllers\UserController::class, 'updateUserAndClient']);
+Route::post('/user/createUserAndClient', [App\Http\Controllers\UserController::class, 'createUserAndClient']);
+Route::delete('user/delete/{id}', [App\Http\Controllers\UserController::class, 'destroy']);
+Route::delete('user/deleteUserAndClient/{id}', [App\Http\Controllers\UserController::class, 'deleteUserAndClient']);
 Route::get('getUsersWithoutClient/{client_id?}', [App\Http\Controllers\UserController::class, 'getUsersWithoutClient']);
 
 Route::post('user/image/{id}', [App\Http\Controllers\UserController::class, 'setImage']);
