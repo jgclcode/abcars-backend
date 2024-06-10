@@ -41,7 +41,9 @@ Route::get('/getRecommendedCarsByVin/{vin}', [App\Http\Controllers\VehicleContro
 
 Route::get('brands', [App\Http\Controllers\BrandController::class, 'allBrands']);
 
-
+Route::resource('states', App\Http\Controllers\StateController::class, [
+    'only' => ['index']
+]);
 
 Route::middleware(['check.ip'])->group(function () {
 
@@ -343,11 +345,6 @@ Route::middleware(['check.ip'])->group(function () {
 
     // servicio para notification reference
     Route::resource('reference', App\Http\Controllers\ReferenceController::class, [
-        'only' => ['index','store','update','destroy']
-    ]);
-
-    // Service of States
-    Route::resource('states', App\Http\Controllers\StateController::class, [
         'only' => ['index','store','update','destroy']
     ]);
 
