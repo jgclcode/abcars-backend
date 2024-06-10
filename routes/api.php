@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['check.server.ip'])->group(function () {
+Route::middleware(['check.ip'])->group(function () {
 
     Route::get('/getRandomVehicles', [App\Http\Controllers\VehicleController::class, 'getRandomVehicles']);
 
