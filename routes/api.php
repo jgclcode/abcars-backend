@@ -35,10 +35,14 @@ Route::get('/vehiclesSearch/{cantidad}/{brandNames?}/{modelNames?}/{years?}/{car
 
 Route::get('image_vehicle/{name}', [App\Http\Controllers\Vehicle_ImageController::class, 'getImage']);
 
+Route::get('/vehicleByVin/{vin}', [App\Http\Controllers\VehicleController::class, 'vehiclesByVin']);
+
+Route::get('/getRecommendedCarsByVin/{vin}', [App\Http\Controllers\VehicleController::class, 'getRecommendedCarsByVin']);
+
+
+
 
 Route::middleware(['check.ip'])->group(function () {
-
-    Route::get('/vehicleByVin/{vin}', [App\Http\Controllers\VehicleController::class, 'vehiclesByVin']);
 
     Route::get('/vehiclesSearchAll/{cantidad}/{brandNames?}/{modelNames?}/{years?}/{carrocerias?}/{price?}/{word?}/{orden?}/{states?}', [App\Http\Controllers\VehicleController::class, 'vehiclesSearchAll']);
 
@@ -288,8 +292,6 @@ Route::middleware(['check.ip'])->group(function () {
     Route::get('vehicle_incidentByClientId/{client_id}', [App\Http\Controllers\Vehicle_incidentController::class, 'getAllByClientId']);
 
     Route::get('/get_set_vehicle/{vehicle_id}', [App\Http\Controllers\VehicleController::class, 'get_set_vehicle']);
-
-    Route::get('/getRecommendedCarsByVin/{vin}', [App\Http\Controllers\VehicleController::class, 'getRecommendedCarsByVin']);
 
     // Servicio para obtener los choices por usuario en sessionStorage
     Route::get('choices/{user_id}', [App\Http\Controllers\ChoiceController::class, 'getChoices']);
