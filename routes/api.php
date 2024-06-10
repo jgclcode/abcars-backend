@@ -14,20 +14,32 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Rutas públicas
+Route::get('/getRandomVehicles', [App\Http\Controllers\VehicleController::class, 'getRandomVehicles']);
+
+Route::get('/brandsByActiveVehicles/{modelNames?}/{years?}/{carrocerias?}/{price?}/{states?}/{transmissions?}', [App\Http\Controllers\VehicleController::class, 'brandsByActiveVehicles']);
+
+Route::get('/modelsByActiveVehicles/{brandNames?}/{years?}/{carrocerias?}/{price?}/{states?}/{transmissions?}', [App\Http\Controllers\VehicleController::class, 'modelsByActiveVehicles']);
+
+Route::get('/yearsByActiveVehicles/{brandNames?}/{modelNames?}/{carrocerias?}/{price?}/{states?}/{transmissions?}', [App\Http\Controllers\VehicleController::class, 'yearsByActiveVehicles']);
+
+Route::get('/vehiclebodiesByActiveVehicles/{brandNames?}/{modelNames?}/{years?}/{price?}/{states?}/{transmissions?}', [App\Http\Controllers\VehicleController::class, 'vehiclebodiesByActiveVehicles']);
+
+Route::get('/statesByActiveVehicles/{brandNames?}/{modelNames?}/{carrocerias?}/{years?}/{price?}/{transmissions?}', [App\Http\Controllers\VehicleController::class, 'statesByActiveVehicles']);
+
+Route::get('/transmissionsByActiveVehicles/{brandNames?}/{modelNames?}/{carrocerias?}/{years?}/{price?}/{states?}', [App\Http\Controllers\VehicleController::class, 'transmissionsByActiveVehicles']);
+
+Route::get('getMinMaxPrices', [App\Http\Controllers\VehicleController::class, 'minMaxPrices']);
+
 Route::middleware(['check.ip'])->group(function () {
 
-    Route::get('/getRandomVehicles', [App\Http\Controllers\VehicleController::class, 'getRandomVehicles']);
+    Route::get('/vehicleByVin/{vin}', [App\Http\Controllers\VehicleController::class, 'vehiclesByVin']);
 
     Route::get('/vehiclesSearch/{cantidad}/{brandNames?}/{modelNames?}/{years?}/{carrocerias?}/{price?}/{word?}/{orden?}/{states?}/{transmissions?}', [App\Http\Controllers\VehicleController::class, 'vehiclesSearch']);
+
     Route::get('/vehiclesSearchAll/{cantidad}/{brandNames?}/{modelNames?}/{years?}/{carrocerias?}/{price?}/{word?}/{orden?}/{states?}', [App\Http\Controllers\VehicleController::class, 'vehiclesSearchAll']);
+
     Route::get('/vehicleById/{vehicle_id}', [App\Http\Controllers\VehicleController::class, 'vehiclesById']);
-    Route::get('/vehicleByVin/{vin}', [App\Http\Controllers\VehicleController::class, 'vehiclesByVin']);
-    Route::get('/brandsByActiveVehicles/{modelNames?}/{years?}/{carrocerias?}/{price?}/{states?}/{transmissions?}', [App\Http\Controllers\VehicleController::class, 'brandsByActiveVehicles']);
-    Route::get('/modelsByActiveVehicles/{brandNames?}/{years?}/{carrocerias?}/{price?}/{states?}/{transmissions?}', [App\Http\Controllers\VehicleController::class, 'modelsByActiveVehicles']);
-    Route::get('/yearsByActiveVehicles/{brandNames?}/{modelNames?}/{carrocerias?}/{price?}/{states?}/{transmissions?}', [App\Http\Controllers\VehicleController::class, 'yearsByActiveVehicles']);
-    Route::get('/vehiclebodiesByActiveVehicles/{brandNames?}/{modelNames?}/{years?}/{price?}/{states?}/{transmissions?}', [App\Http\Controllers\VehicleController::class, 'vehiclebodiesByActiveVehicles']);
-    Route::get('/statesByActiveVehicles/{brandNames?}/{modelNames?}/{carrocerias?}/{years?}/{price?}/{transmissions?}', [App\Http\Controllers\VehicleController::class, 'statesByActiveVehicles']);
-    Route::get('/transmissionsByActiveVehicles/{brandNames?}/{modelNames?}/{carrocerias?}/{years?}/{price?}/{states?}', [App\Http\Controllers\VehicleController::class, 'transmissionsByActiveVehicles']);
 
     Route::post('/askInformationVehicle', [App\Http\Controllers\VehicleController::class, 'askInformationVehicle']);
 
@@ -577,9 +589,6 @@ Route::middleware(['check.ip'])->group(function () {
         'only' => ['index','store','update','destroy']
     ]);
     Route::get('feedVehiclesToBusinessPro', [App\Http\Controllers\BusinessProController::class, 'getVehiclesToBusinessPro']);
-
-    Route::get('getMinMaxPrices', [App\Http\Controllers\VehicleController::class, 'minMaxPrices']);
-
 
     Route::resource('sheet_quote', App\Http\Controllers\Sheet_quoteController::class, [
         'only' => ['index', 'store', 'update', 'destroy']
