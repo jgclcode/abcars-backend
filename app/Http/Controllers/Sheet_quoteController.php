@@ -222,4 +222,109 @@ class Sheet_quoteController extends Controller
         return response()->json($data, $data['code']);
 
     }
+
+    public function prospection_chevrolet(Request $request)
+    {
+        if (!is_array($request->all())) {
+            $data = array(
+                'status'  => 'error',
+                'code'    => '200',
+                'message' => 'request must be an array'
+            );
+        }
+
+        $rules = [
+            'body'     => 'required|max:255|string',
+            'brand'    => 'required|max:255|string',
+            'model'    => 'required|max:255|string',
+            'name'     => 'required|max:255|string',
+            'surname'  => 'required|max:255|string',
+            'email'    => 'required|max:255|string',
+            'phone'    => 'required|integer',
+            'buyType'  => 'max:255|string',
+            'clientPriceOffer' => 'integer',
+            'folioNumber' => 'string',
+            'fullNameReferring' => 'max:255|string'
+        ];
+
+        try {
+            // validación de tipado y campos requeridos
+            $validator = \Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                // existió un error en los campos enviados
+                $data = array(
+                    'status' => 'error',
+                    'code'   => '200',
+                    'errors' => $validator->errors()->all()
+                );
+            } else {
+                $sheetQuotationChevrolet = array(
+                    'model'             => $request->model,
+                    'name'              => $request->name,
+                    'surname'           => $request->surname,
+                    'email'             => $request->email,
+                    'phone'             => $request->phone,
+                    'buyType'           => $request->buyType,
+                    'clientPriceOffer'  => $request->clientPriceOffer,
+                    'fecha'   => date_format(date_create(), "d-m-y H:i:s"), 
+                    'nombreProspecto'  => $request->prospectorName,
+                    'apellidosProspecto'  => $request->prospectorSurname,
+                    'lugarDeProspección'  => $request->placeProspection,
+                    'commentarioProspecto'  => $request->commentaryLead,
+                    'siguienteAccion'  => $request->next,
+                    'numeroDeFolio'  => $request->folioNumber,
+                    'nombreCompletoReferente'  => $request->fullNameReferring,
+                );
+                // dd($request->body, $request->brand, $request->model,
+                // $request->name, $request->surname, $request->email,
+                // $request->phone, $request->buyType);
+                // Creación de sheet_quote_chevrolet
+                $sheet_quote_chevrolet = new Sheet_quote();
+                $sheet_quote_chevrolet->body = $request->body;
+                $sheet_quote_chevrolet->brand = $request->brand;
+                $sheet_quote_chevrolet->model = $request->model;
+                $sheet_quote_chevrolet->name = $request->name;
+                $sheet_quote_chevrolet->surname = $request->surname;
+                $sheet_quote_chevrolet->email = $request->email;
+                $sheet_quote_chevrolet->phone = $request->phone;
+                $sheet_quote_chevrolet->buyType = $request->buyType;
+                $sheet_quote_chevrolet->clientPriceOffer = $request->clientPriceOffer;
+                $sheet_quote_chevrolet->folioNumber = $request->folioNumber;
+                $sheet_quote_chevrolet->fullNameReferring = $request->fullNameReferring;
+                $sheet_quote_chevrolet->save();
+
+                $this->sheetQuotationChevrolet( $sheetQuotationChevrolet );
+
+                $data = array(
+                    'status'    => 'success',
+                    'code'      => '200',
+                    'message'   => 'La cotización en spreadsheet se ha creado exitosamente.',
+                    'sheet_quote_chevrolet' => $sheet_quote_chevrolet
+                );
+            }
+        } catch (Exception $e) {
+            $data = array(
+                'status' => 'error',
+                'code'   => '200',
+                'message' => 'Los datos enviados no son correctos, ' . $e
+            );
+        }
+
+        return response()->json($data, $data['code']);
+    }
+
+    public function sheetQuotationChevrolet( Array $datos )
+    {
+        $ch = curl_init();
+        // curl_setopt($ch, CURLOPT_URL, "https://hooks.zapier.com/hooks/catch/8825119/3x68csl");
+        curl_setopt($ch, CURLOPT_URL, "https://hooks.zapier.com/hooks/catch/8825119/2bgv6n3");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($datos));
+
+        $data = curl_exec($ch);
+        curl_close($ch);
+
+        return $data;
+    }
 }
