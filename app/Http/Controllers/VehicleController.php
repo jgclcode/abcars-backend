@@ -441,7 +441,7 @@ class VehicleController extends Controller
         $apiUrl = "$url/login";        
         $data = array(
             'email' => 'manager@vecsa.com',
-            'password' => 'Hola2022@@',
+            'password' => 'Manager%2024%%',
             'gettoken' => true
         );
         // Inicializar cURL
