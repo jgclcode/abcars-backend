@@ -47,7 +47,9 @@ Route::resource('states', App\Http\Controllers\StateController::class, [
 
 Route::resource('sheet_quote', App\Http\Controllers\Sheet_quoteController::class, [
         'only' => ['store']
-    ]);
+]);
+
+Route::post('prospection_chevrolet', [App\Http\Controllers\Sheet_quoteController::class, 'prospection_chevrolet']);
 
 // servicio para requests
 Route::resource('request', App\Http\Controllers\RequestController::class, [
