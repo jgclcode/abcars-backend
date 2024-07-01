@@ -41,6 +41,8 @@ Route::get('/getRecommendedCarsByVin/{vin}', [App\Http\Controllers\VehicleContro
 
 Route::get('brands', [App\Http\Controllers\BrandController::class, 'allBrands']);
 
+Route::get('/vehicle/carmodels/{brand_id}', [App\Http\Controllers\VehicleController::class, 'modelsVehicle']);
+
 Route::resource('states', App\Http\Controllers\StateController::class, [
     'only' => ['index']
 ]);
@@ -51,15 +53,20 @@ Route::resource('sheet_quote', App\Http\Controllers\Sheet_quoteController::class
 
 Route::post('prospection_chevrolet', [App\Http\Controllers\Sheet_quoteController::class, 'prospection_chevrolet']);
 
-// servicio para requests
 Route::resource('request', App\Http\Controllers\RequestController::class, [
-    'only' => ['store','update','destroy']
+    'only' => ['store']
 ]);
 
 // servicio para notification financing
 Route::resource('financing', App\Http\Controllers\FinancingController::class, [
     'only' => ['store']
 ]);
+
+// Define cada ruta explícitamente
+Route::post('sell_your_car', [App\Http\Controllers\Sell_your_carController::class, 'store']);
+
+// Define cada ruta explícitamente
+Route::post('clients', [App\Http\Controllers\ClientController::class, 'store']);
 
 Route::middleware(['check.ip'])->group(function () {
 
@@ -68,8 +75,6 @@ Route::middleware(['check.ip'])->group(function () {
     Route::get('/vehicleById/{vehicle_id}', [App\Http\Controllers\VehicleController::class, 'vehiclesById']);
 
     Route::post('/askInformationVehicle', [App\Http\Controllers\VehicleController::class, 'askInformationVehicle']);
-
-    Route::get('/vehicle/carmodels/{brand_id}', [App\Http\Controllers\VehicleController::class, 'modelsVehicle']);
 
     Route::resource('vehicle_image', App\Http\Controllers\Vehicle_ImageController::class, [
         'only' => ['index','store','update','destroy']
@@ -131,10 +136,10 @@ Route::middleware(['check.ip'])->group(function () {
 
     Route::get('sources/getAll', [App\Http\Controllers\SourceController::class, 'getAll']);
 
-    //servicios para clientes
-    Route::resource('clients', App\Http\Controllers\ClientController::class, [
-        'only' => ['index','store','update','destroy']
-    ]);
+    // Define cada ruta explícitamente
+    Route::get('clients', [App\Http\Controllers\ClientController::class, 'index']);
+    Route::put('clients/{id}', [App\Http\Controllers\ClientController::class, 'update']);
+    Route::delete('clients/{id}', [App\Http\Controllers\ClientController::class, 'destroy']);
 
     Route::put('/client/updateDataToPolicie/{client_id}', [App\Http\Controllers\ClientController::class, 'updateDataToPolicie']);
 
@@ -246,10 +251,10 @@ Route::middleware(['check.ip'])->group(function () {
         'only' => ['index','store','update','destroy']
     ]);
 
-    //servicios para vende tu carro
-    Route::resource('sell_your_car', App\Http\Controllers\Sell_your_carController::class, [
-        'only' => ['index','store','update','destroy']
-    ]);
+    // Define cada ruta explícitamente
+    Route::get('sell_your_car', [App\Http\Controllers\Sell_your_carController::class, 'index']);
+    Route::put('sell_your_car/{id}', [App\Http\Controllers\Sell_your_carController::class, 'update']);
+    Route::delete('sell_your_car/{id}', [App\Http\Controllers\Sell_your_carController::class, 'destroy']);
 
     // servicio para llenar la tabla de citas vender tu auto y posteriormente realizar la valuación
     Route::get('sell_car', [App\Http\Controllers\Sell_your_carController::class, 'sell_car']);
@@ -666,4 +671,7 @@ Route::middleware(['check.ip'])->group(function () {
     Route::post('/ml_post_vehicle', [App\Http\Controllers\MercadoLibreController::class, 'post_vehicle_ml']);
     Route::post('/update_vehicle_ml', [App\Http\Controllers\MercadoLibreController::class, 'update_vehicle_ml']);
     Route::post('/delete_vehicle_ml', [App\Http\Controllers\MercadoLibreController::class, 'delete_vehicle_ml']);
+
+    Route::put('request/{id}', [App\Http\Controllers\RequestController::class, 'update']);
+    Route::delete('request/{id}', [App\Http\Controllers\RequestController::class, 'destroy']);
 });
