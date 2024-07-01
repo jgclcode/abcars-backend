@@ -209,6 +209,8 @@ class VehicleController extends Controller
         $jwtAuth = new \App\Helpers\JwtAuth();
         $checkToken = $jwtAuth->checkToken($token);
 
+        Log::info('Datos del update', ['request' => $request]);
+
         if($checkToken){
             $rules =[
                 'name' => 'required|max:255|string',
