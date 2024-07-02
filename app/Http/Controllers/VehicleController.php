@@ -572,7 +572,7 @@ class VehicleController extends Controller
         return response()->json($data, $data['code']);
     }
 
-    public function vehiclesSearch( int $cantidad, String $brandNames = '', String $modelNames = '', String $years = '', String $carrocerias = '', float $price = 0, String $word = '', String $orden = '', String $states = '' , String $transmissions = ''){
+    public function vehiclesSearch( int $cantidad, String $brandNames = '', String $modelNames = '', String $years = '', String $carrocerias = '', float $minPrice = 0, float $maxPrice, String $word = '', String $orden = '', String $states = '' , String $transmissions = ''){
         // Condiciones dinamicas
         // Brands
         $brandNames = explode(",", $brandNames);
@@ -591,7 +591,7 @@ class VehicleController extends Controller
         $carroceria_condition = is_array($carrocerias) && !is_null($carrocerias) ? $this->conditionCarroceria($carrocerias) : $this->conditionCarroceria([]);
         
         // Price
-        $price_condition = !is_null($price) ? $this->conditionPrice($price) : $this->conditionPrice(0);
+        $price_condition = $this->conditionPrice($minPrice, $maxPrice);
 
         // States
         $states = explode(",", $states);
@@ -673,7 +673,7 @@ class VehicleController extends Controller
         return response()->json($data, $data['code']);
     }
 
-    public function vehiclesSearchAll( int $cantidad, String $brandNames = '', String $modelNames = '', String $years = '', String $carrocerias = '', float $price = 0, String $word = '', String $orden = '', String $states = '' ){
+    public function vehiclesSearchAll( int $cantidad, String $brandNames = '', String $modelNames = '', String $years = '', String $carrocerias = '', float $minPrice = 0, float $maxPrice, String $word = '', String $orden = '', String $states = '' ){
         // Condiciones dinamicas
         // Brands
         $brandNames = explode(",", $brandNames);
@@ -692,7 +692,7 @@ class VehicleController extends Controller
         $carroceria_condition = is_array($carrocerias) && !is_null($carrocerias) ? $this->conditionCarroceria($carrocerias) : $this->conditionCarroceria([]);
         
         // Price
-        $price_condition = !is_null($price) ? $this->conditionPrice($price) : $this->conditionPrice(0);
+        $price_condition = $this->conditionPrice($minPrice, $maxPrice);
 
         // States
         $states = explode(",", $states);
@@ -826,7 +826,7 @@ class VehicleController extends Controller
         return response()->json($data, $data['code']);
     }
 
-    public function brandsByActiveVehicles( String $modelNames = '', String $years = '', String $carrocerias = '', float $price = 0, String $states = '', String $transmissions = ''  ){
+    public function brandsByActiveVehicles( String $modelNames = '', String $years = '', String $carrocerias = '', float $minPrice = 0, float $maxPrice, String $states = '', String $transmissions = ''  ){
         // Models
         $modelNames = explode(",", $modelNames);
         $model_condition = is_array($modelNames) && !is_null($modelNames) ? $this->conditionModel($modelNames) : $this->conditionModel([]);
@@ -840,7 +840,7 @@ class VehicleController extends Controller
         $carroceria_condition = is_array($carrocerias) && !is_null($carrocerias) ? $this->conditionCarroceria($carrocerias) : $this->conditionCarroceria([]);
         
         // Price
-        $price_condition = !is_null($price) ? $this->conditionPrice($price) : $this->conditionPrice(0);
+        $price_condition = $this->conditionPrice($minPrice, $maxPrice);
 
         // States
         $states = explode(",", $states);
@@ -878,7 +878,7 @@ class VehicleController extends Controller
         return response()->json($data, $data['code']);
     }
 
-    public function modelsByActiveVehicles( String $brandNames = '', String $years = '', String $carrocerias = '', float $price = 0, String $states = '', String $transmissions = ''  ){
+    public function modelsByActiveVehicles( String $brandNames = '', String $years = '', String $carrocerias = '', float $minPrice = 0, float $maxPrice, String $states = '', String $transmissions = ''  ){
         // Brands
         $brandNames = explode(",", $brandNames);
         $brand_condition = is_array($brandNames) && !is_null($brandNames) ? $this->conditionBrand($brandNames) : $this->conditionBrand([]);
@@ -892,7 +892,7 @@ class VehicleController extends Controller
         $carroceria_condition = is_array($carrocerias) && !is_null($carrocerias) ? $this->conditionCarroceria($carrocerias) : $this->conditionCarroceria([]);
         
         // Price
-        $price_condition = !is_null($price) ? $this->conditionPrice($price) : $this->conditionPrice(0);
+        $price_condition = $this->conditionPrice($minPrice, $maxPrice);
 
         // States
         $states = explode(",", $states);
@@ -980,7 +980,7 @@ class VehicleController extends Controller
         return response()->json($data, $data['code']);
     }
 
-    public function vehiclebodiesByActiveVehicles( String $brandNames = '', String $modelNames = '', String $years = '', float $price = 0, String $states = '', String $transmissions = '' ){
+    public function vehiclebodiesByActiveVehicles( String $brandNames = '', String $modelNames = '', String $years = '', float $minPrice = 0, float $maxPrice, String $states = '', String $transmissions = '' ){
         // Brands
         $brandNames = explode(",", $brandNames);
         $brand_condition = is_array($brandNames) && !is_null($brandNames) ? $this->conditionBrand($brandNames) : $this->conditionBrand([]);
@@ -994,7 +994,7 @@ class VehicleController extends Controller
         $year_condition = is_array($years) && !is_null($years) ? $this->conditionYear($years) : $this->conditionYear([]);
         
         // Price
-        $price_condition = !is_null($price) ? $this->conditionPrice($price) : $this->conditionPrice(0);
+        $price_condition = $this->conditionPrice($minPrice, $maxPrice);
 
         // States
         $states = explode(",", $states);
@@ -1032,7 +1032,7 @@ class VehicleController extends Controller
         return response()->json($data, $data['code']);
     }
 
-    public function statesByActiveVehicles( String $brandNames = '', String $modelNames = '', String $carrocerias = '', String $years = '', float $price = 0, String $transmissions = '' ){
+    public function statesByActiveVehicles( String $brandNames = '', String $modelNames = '', String $carrocerias = '', String $years = '', float $minPrice = 0, float $maxPrice, String $transmissions = '' ){
         // Brands
         $brandNames = explode(",", $brandNames);
         $brand_condition = is_array($brandNames) && !is_null($brandNames) ? $this->conditionBrand($brandNames) : $this->conditionBrand([]);
@@ -1046,7 +1046,7 @@ class VehicleController extends Controller
         $year_condition = is_array($years) && !is_null($years) ? $this->conditionYear($years) : $this->conditionYear([]);
         
         // Price
-        $price_condition = !is_null($price) ? $this->conditionPrice($price) : $this->conditionPrice(0);
+        $price_condition = $this->conditionPrice($minPrice, $maxPrice);
 
         // Carroceria
         $carrocerias = explode(",", $carrocerias);
@@ -1083,7 +1083,7 @@ class VehicleController extends Controller
         return response()->json($data, $data['code']);
     }
 
-    public function transmissionsByActiveVehicles( String $brandNames = '', String $modelNames = '', String $carrocerias = '',  String $years = '', float $price = 0, String $states = '' ){
+    public function transmissionsByActiveVehicles( String $brandNames = '', String $modelNames = '', String $carrocerias = '',  String $years = '', float $minPrice = 0, float $maxPrice, String $states = '' ){
         // Brands
         $brandNames = explode(",", $brandNames);
         $brand_condition = is_array($brandNames) && !is_null($brandNames) ? $this->conditionBrand($brandNames) : $this->conditionBrand([]);
@@ -1101,7 +1101,7 @@ class VehicleController extends Controller
         $year_condition = is_array($years) && !is_null($years) ? $this->conditionYear($years) : $this->conditionYear([]);
         
         // Price
-        $price_condition = !is_null($price) ? $this->conditionPrice($price) : $this->conditionPrice(0);
+        $price_condition = $this->conditionPrice($minPrice, $maxPrice);
 
         // States
         $states = explode(",", $states);
