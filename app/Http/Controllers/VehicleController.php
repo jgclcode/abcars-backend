@@ -20,14 +20,10 @@ use App\Models\SetImage;
 use App\Models\Check_vehicle;
 use Illuminate\Support\Facades\Storage;
 
-
-
 // Excel
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\VehiclesImport;
 use App\Imports\UpdatePromotionsImport;
-use Cloudinary\Api\Admin\AdminApi;
-use Cloudinary\Configuration\Configuration;
 
 class VehicleController extends Controller
 {
