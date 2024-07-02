@@ -20,8 +20,6 @@ use App\Models\SetImage;
 use App\Models\Check_vehicle;
 use Illuminate\Support\Facades\Storage;
 
-
-
 // Excel
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\VehiclesImport;
@@ -935,7 +933,7 @@ class VehicleController extends Controller
         return response()->json($data, $data['code']);
     }
 
-    public function yearsByActiveVehicles( String $brandNames = '', String $modelNames = '', String $carrocerias = '', float $minPrice = 0, float $maxPrice = 0, String $states = '', String $transmissions = '' ){
+    public function yearsByActiveVehicles( String $brandNames = '', String $modelNames = '', String $carrocerias = '', float $price = 0, String $states = '', String $transmissions = '' ){
         // Brands
         $brandNames = explode(",", $brandNames);
         $brand_condition = is_array($brandNames) && !is_null($brandNames) ? $this->conditionBrand($brandNames) : $this->conditionBrand([]);
@@ -949,7 +947,7 @@ class VehicleController extends Controller
         $carroceria_condition = is_array($carrocerias) && !is_null($carrocerias) ? $this->conditionCarroceria($carrocerias) : $this->conditionCarroceria([]);
         
         // Price
-        $price_condition = $this->conditionPrice($minPrice, $maxPrice);
+        $price_condition = !is_null($price) ? $this->conditionPrice($price) : $this->conditionPrice(0);
 
         // States
         $states = explode(",", $states);
@@ -1202,9 +1200,9 @@ class VehicleController extends Controller
         return $carroceria_condition;
     }
 
-    private function conditionPrice( float $minPrice, float $maxPrice ){
-        if( $maxPrice > $minPrice ){
-            $price_condition = "vehicles.salePrice BETWEEN $minPrice AND $maxPrice";
+    private function conditionPrice( float $price ){
+        if( $price > 0 ){
+            $price_condition = "vehicles.salePrice BETWEEN 0 AND $price";
         }else{
             $price_condition = "vehicles.salePrice != 0";
         }
