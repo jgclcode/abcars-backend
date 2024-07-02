@@ -274,6 +274,12 @@ class VehicleController extends Controller
                             // Valida si el nuevo precio es menor que el precio guardado para detectar una promoción, sino, elimina el precio oferta y
                             // guarda nuevo precio
                             if (!is_null($request->priceOffer)) {
+
+                                if ($request->price < $vehicle->price && $request->price < $vehicle->priceOffer) {
+                                    $vehicle->price = $vehicle->priceOffer;
+                                    $vehicle->priceOffer = $request->price;
+                                }
+
                                 if ($request->price < $vehicle->price) {
                                     $vehicle->price = $vehicle->price;
                                     $vehicle->priceOffer = $request->price;
