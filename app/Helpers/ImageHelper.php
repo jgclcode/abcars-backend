@@ -50,24 +50,24 @@ class ImageHelper {
         $name = str_replace(' ', '', $name);
         $path = storage_path() . "/app/$directory/".$name;
 
+        $currentMonthFolder = date('Y-m');
+
+        // Comprobamos si $quality es false y subimos la imagen con las transformaciones correspondientes
         if($quality == false){
             $compressedImageURL = cloudinary()->upload($image->getRealPath(), [
                 'public_id' => $name,
-                'folder' => 'uploads',
+                'folder' => 'abcars/' . $currentMonthFolder,
                 'transformation' => [
                     'quality' => 'auto',
                     'fetch_format' => 'auto'
                 ]
             ])->getSecurePath();
-        
         } else {
-            
             $compressedImageURL = cloudinary()->upload($image->getRealPath(), [
                 'public_id' => $name,
-                'folder' => 'uploads',
+                'folder' => 'abcars/' . $currentMonthFolder,
                 'quality' => $quality,
             ])->getSecurePath();
-
         }
 
         $compressedImage = self::fileGetContentsCurl($compressedImageURL);
