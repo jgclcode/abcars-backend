@@ -933,7 +933,7 @@ class VehicleController extends Controller
         return response()->json($data, $data['code']);
     }
 
-    public function yearsByActiveVehicles( String $brandNames = '', String $modelNames = '', String $carrocerias = '', float $price = 0, String $states = '', String $transmissions = '' ){
+    public function yearsByActiveVehicles( String $brandNames = '', String $modelNames = '', String $carrocerias = '', float $minPrice = 0, float $maxPrice = 0, String $states = '', String $transmissions = '' ){
         // Brands
         $brandNames = explode(",", $brandNames);
         $brand_condition = is_array($brandNames) && !is_null($brandNames) ? $this->conditionBrand($brandNames) : $this->conditionBrand([]);
@@ -947,7 +947,7 @@ class VehicleController extends Controller
         $carroceria_condition = is_array($carrocerias) && !is_null($carrocerias) ? $this->conditionCarroceria($carrocerias) : $this->conditionCarroceria([]);
         
         // Price
-        $price_condition = !is_null($price) ? $this->conditionPrice($price) : $this->conditionPrice(0);
+        $price_condition = $this->conditionPrice($minPrice, $maxPrice);
 
         // States
         $states = explode(",", $states);

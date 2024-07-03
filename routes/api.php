@@ -17,27 +17,20 @@ use Illuminate\Support\Facades\Route;
 // Rutas públicas
 Route::get('/getRandomVehicles', [App\Http\Controllers\VehicleController::class, 'getRandomVehicles']);
 
-// Route::get('/brandsByActiveVehicles/{modelNames?}/{years?}/{carrocerias?}/{price?}/{states?}/{transmissions?}', [App\Http\Controllers\VehicleController::class, 'brandsByActiveVehicles']);
 Route::get('/brandsByActiveVehicles/{modelNames?}/{years?}/{carrocerias?}/{minprice?}/{price?}/{states?}/{transmissions?}', [App\Http\Controllers\VehicleController::class, 'brandsByActiveVehicles']);
 
-// Route::get('/modelsByActiveVehicles/{brandNames?}/{years?}/{carrocerias?}/{price?}/{states?}/{transmissions?}', [App\Http\Controllers\VehicleController::class, 'modelsByActiveVehicles']);
 Route::get('/modelsByActiveVehicles/{brandNames?}/{years?}/{carrocerias?}/{minprice?}/{price?}/{states?}/{transmissions?}', [App\Http\Controllers\VehicleController::class, 'modelsByActiveVehicles']);
 
-// Route::get('/yearsByActiveVehicles/{brandNames?}/{modelNames?}/{carrocerias?}/{price?}/{states?}/{transmissions?}', [App\Http\Controllers\VehicleController::class, 'yearsByActiveVehicles']);
 Route::get('/yearsByActiveVehicles/{brandNames?}/{modelNames?}/{carrocerias?}/{minprice?}/{price?}/{states?}/{transmissions?}', [App\Http\Controllers\VehicleController::class, 'yearsByActiveVehicles']);
 
-// Route::get('/vehiclebodiesByActiveVehicles/{brandNames?}/{modelNames?}/{years?}/{price?}/{states?}/{transmissions?}', [App\Http\Controllers\VehicleController::class, 'vehiclebodiesByActiveVehicles']);
 Route::get('/vehiclebodiesByActiveVehicles/{brandNames?}/{modelNames?}/{years?}/{minprice?}/{price?}/{states?}/{transmissions?}', [App\Http\Controllers\VehicleController::class, 'vehiclebodiesByActiveVehicles']);
 
-// Route::get('/statesByActiveVehicles/{brandNames?}/{modelNames?}/{carrocerias?}/{years?}/{price?}/{transmissions?}', [App\Http\Controllers\VehicleController::class, 'statesByActiveVehicles']);
 Route::get('/statesByActiveVehicles/{brandNames?}/{modelNames?}/{carrocerias?}/{years?}/{minprice?}/{price?}/{transmissions?}', [App\Http\Controllers\VehicleController::class, 'statesByActiveVehicles']);
 
-// Route::get('/transmissionsByActiveVehicles/{brandNames?}/{modelNames?}/{carrocerias?}/{years?}/{price?}/{states?}', [App\Http\Controllers\VehicleController::class, 'transmissionsByActiveVehicles']);
 Route::get('/transmissionsByActiveVehicles/{brandNames?}/{modelNames?}/{carrocerias?}/{years?}/{minprice?}/{price?}/{states?}', [App\Http\Controllers\VehicleController::class, 'transmissionsByActiveVehicles']);
 
 Route::get('getMinMaxPrices', [App\Http\Controllers\VehicleController::class, 'minMaxPrices']);
 
-// Route::get('/vehiclesSearch/{cantidad}/{brandNames?}/{modelNames?}/{years?}/{carrocerias?}/{price?}/{word?}/{orden?}/{states?}/{transmissions?}', [App\Http\Controllers\VehicleController::class, 'vehiclesSearch']);
 Route::get('/vehiclesSearch/{cantidad}/{brandNames?}/{modelNames?}/{years?}/{carrocerias?}/{minprice?}/{price?}/{word?}/{orden?}/{states?}/{transmissions?}', [App\Http\Controllers\VehicleController::class, 'vehiclesSearch']);
 
 Route::get('image_vehicle/{name}', [App\Http\Controllers\Vehicle_ImageController::class, 'getImage']);
