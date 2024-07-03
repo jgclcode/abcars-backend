@@ -1200,9 +1200,9 @@ class VehicleController extends Controller
         return $carroceria_condition;
     }
 
-    private function conditionPrice( float $price ){
-        if( $price > 0 ){
-            $price_condition = "vehicles.salePrice BETWEEN 0 AND $price";
+    private function conditionPrice( float $minPrice, float $maxPrice ){
+        if( $maxPrice > $minPrice ){
+            $price_condition = "vehicles.salePrice BETWEEN $minPrice AND $maxPrice";
         }else{
             $price_condition = "vehicles.salePrice != 0";
         }
