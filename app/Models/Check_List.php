@@ -27,6 +27,11 @@ class Check_List extends Model
         return $this->belongsTo(Technician::class);
     }
 
+    public function tech_user()
+    {
+        return $this->belongsTo(User::class, 'technician_id');
+    }
+
     public function document_images() {
         return $this->hasMany(Document_image::class);
     }

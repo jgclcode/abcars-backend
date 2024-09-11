@@ -29,7 +29,8 @@ class Sell_your_carController extends Controller
                                     }])
                                     // ->paginate(10)
                                     ->orderBy('id', 'desc')->paginate(10);
-        $sell_your_car->load('brand', 'carmodel', 'check_list', 'client_sale');
+        // $sell_your_car->load('brand', 'carmodel', 'check_list', 'client_sale');
+        $sell_your_car->load('brand', 'carmodel', 'check_list', 'check_list.tech_user', 'client_sale');
 
         $data = array(
             'code' => 200,
