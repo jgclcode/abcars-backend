@@ -634,8 +634,43 @@
 
                                     <span style="font-weight: bold !important;  "></span>Mano de obra: $ {{ $vin_check_list->workforce }}</span>
                                     <br>
+                                    <br>
+
+                                    <table style="font-size: 8px;">
+                                        
+                                        <tr>
+                                            <td>Nom Refacción</td>
+                                            <td>Precio</td>
+                                            <td>Cantidad</td>
+                                            <td>Nom Refacción</td>
+                                            <td>Precio</td>
+                                            <td>Cantidad</td>
+                                            <td>Nom Refacción</td>
+                                            <td>Precio</td>
+                                            <td>Cantidad</td>
+                                        </tr>
+                                        @foreach($sparePart as $spare)
+                                            <tr>
+                                                <td>{{ $spare->name }}</td>
+                                                <td>{{ $spare->priceOriginal }}</td>
+                                                <td>{{ $spare->amount }}</td>
+                                                <td>{{ $spare->name }}</td>
+                                                <td>{{ $spare->priceGeneric }}</td>
+                                                <td>{{ $spare->amount }}</td>
+                                                <td>{{ $spare->name }}</td>
+                                                <td>{{ $spare->priceUsed }}</td>
+                                                <td>{{ $spare->amount }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </table>
+
+                                    <span style="font-weight: bold !important;  "></span>Partes/refacciones Originales: $ {{ $vin_check_list->spare_parts }}</span>
+                                    <br>
                                     
-                                    <span style="font-weight: bold !important;  "></span>Partes/refacciones: $ {{ $vin_check_list->spare_parts }}</span>
+                                    <span style="font-weight: bold !important;  "></span>Partes/refacciones Genéricas: $ {{ $sumGeneric }}</span>
+                                    <br>
+                                    
+                                    <span style="font-weight: bold !important;  "></span>Partes/refacciones Usandas: $ {{ $sumUsed }}</span>
                                     <br>
                                     
                                     <span style="font-weight: bold !important;  "></span>HyP: $ {{ $vin_check_list->hyp }}</span>

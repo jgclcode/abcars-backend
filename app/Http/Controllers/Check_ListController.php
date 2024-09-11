@@ -773,6 +773,7 @@ class Check_ListController extends Controller
     public function check_pdf($vin){
       //obtener vin
       $findbyvin = Sell_your_car::firstWhere('vin', $vin);
+      $sparePart = Spare_part::where('sell_your_car_id', $findbyvin->id)->get();
       $findvin = $findbyvin->load('brand', 'carmodel', 'client_sale');
       if( is_object($findbyvin) && !is_null($findbyvin) ){
 
@@ -788,6 +789,13 @@ class Check_ListController extends Controller
         $cert=Certification::firstWhere('sell_your_car_id', $vin_check_list ->sell_your_car_id);
         //dd($cert);
 
+        $sumGeneric = $sparePart->sum(function($spare) {
+          return $spare->priceGeneric * $spare->amount;
+        });
+
+        $sumUsed = $sparePart->sum(function($spare) {
+          return $spare->priceUsed * $spare->amount;
+        });
 
         //-> user_id    propietario
         /* $valuador =User::firstWhere('id', $vin_check_list -> user_id);
@@ -795,7 +803,7 @@ class Check_ListController extends Controller
         $tecval = User::firstWhere('id', $vin_check_list->technician_id);
   //       $tecnico=User::firstWhere('id', $technician -> user_id);
  
-        $report = PDF::loadView('check_list.check' ,compact('cert','mecElec','revInt','revExt','vin_check_list','findbyvin','tecval', 'findvin'));
+        $report = PDF::loadView('check_list.check' ,compact('cert','mecElec','revInt','revExt','vin_check_list','findbyvin','tecval', 'findvin', 'sparePart', 'sumGeneric', 'sumUsed'));
         //return ($report->setPaper( 'A4' , 'Landscape')->download('CheclList.pdf'));
         // return ($report->download('CheckList.pdf'));
         return ($report->stream());

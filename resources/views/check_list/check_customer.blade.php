@@ -1072,11 +1072,13 @@
                                         <tr>
                                             <td>Nom Refacción</td>
                                             <td>Precio</td>
+                                            <td>Cantidad</td>
                                         </tr>
                                         @foreach($sparePart as $spare)
                                             <tr>
                                                 <td>{{ $spare->name }}</td>
                                                 <td>{{ $spare->priceOriginal }}</td>
+                                                <td>{{ $spare->amount }}</td>
                                             </tr>
                                         @endforeach
                                     </table>
