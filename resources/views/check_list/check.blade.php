@@ -598,6 +598,51 @@
                 </div>
             </div>
         </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+        <div class="row">
+            <table class="table " style="font-size: 8px;">
+                <td>
+                    <br>
+                    <br>
+                    <span style="font-size:  10px !important; font-weight: bold !important;  ">__________________________________</span>
+                    <br>
+                    
+                    <span style="font-size:  10px !important; font-weight: bold !important;  ">TECNICO CERTIFICADO POR GM</span>
+                    <br>
+                    
+                </td>
+                
+                <td>
+                    <br>
+                    <br>
+                    <span style="font-size:  10px !important; font-weight: bold !important;  ">_______________________________</span>
+                    <br>
+                    
+                    <span style="font-size:  10px !important; font-weight: bold !important;  ">GERENTE DE SEMINUEVOS</span>
+                    <br>
+                </td>
+                
+                <td>
+                    <br>
+                    <br>
+                    <span style="font-size:  10px !important; font-weight: bold !important;  ">_______________________________</span>
+                    <br>
+                    
+                    <span style="font-size:  10px !important; font-weight: bold !important;  ">VALUADOR - COMPRADOR</span>
+                    <br>
+                </td>
+            </table>
+        </div>
 
         <div class="row">
             <div class="col-md-12">
@@ -636,55 +681,6 @@
                                     <br>
                                     <br>
 
-                                    <table style="font-size: 8px;">
-                                        
-                                        <tr>
-                                            <td>Nom Refacción</td>
-                                            <td>Precio</td>
-                                            <td>Cantidad</td>
-                                            <td>Nom Refacción</td>
-                                            <td>Precio</td>
-                                            <td>Cantidad</td>
-                                            <td>Nom Refacción</td>
-                                            <td>Precio</td>
-                                            <td>Cantidad</td>
-                                        </tr>
-                                        @foreach($sparePart as $spare)
-                                            <tr>
-                                                <td>{{ $spare->name }}</td>
-                                                <td>{{ $spare->priceOriginal }}</td>
-                                                <td>{{ $spare->amount }}</td>
-                                                <td>{{ $spare->name }}</td>
-                                                <td>{{ $spare->priceGeneric }}</td>
-                                                <td>{{ $spare->amount }}</td>
-                                                <td>{{ $spare->name }}</td>
-                                                <td>{{ $spare->priceUsed }}</td>
-                                                <td>{{ $spare->amount }}</td>
-                                            </tr>
-                                        @endforeach
-                                    </table>
-
-                                    <span style="font-weight: bold !important;  "></span>Partes/refacciones Originales: $ {{ $vin_check_list->spare_parts }}</span>
-                                    <br>
-                                    
-                                    <span style="font-weight: bold !important;  "></span>Partes/refacciones Genéricas: $ {{ $sumGeneric }}</span>
-                                    <br>
-                                    
-                                    <span style="font-weight: bold !important;  "></span>Partes/refacciones Usandas: $ {{ $sumUsed }}</span>
-                                    <br>
-                                    
-                                    <span style="font-weight: bold !important;  "></span>HyP: $ {{ $vin_check_list->hyp }}</span>
-                                    <br>
-                                    
-                                    <span style="font-weight: bold !important;  "></span>Total: $ {{ $vin_check_list->total }}</span>
-                                    <br>
-                                    <span style="font-size:  10px !important; font-weight: bold !important;  ">Toma y Oferta Final:</span>
-                                    <br>
-                                    <span style="font-weight: bold !important;  "></span>Valor toma: $ {{ $vin_check_list->take_value }}</span>
-                                    <br>
-                                    
-                                    <span style="font-weight: bold !important;  "></span>Oferta final: $ {{ $vin_check_list->final_offer }}</span>
-                                    <br>
                                 </td>
 
                                 <td>
@@ -708,39 +704,60 @@
         </div>
 
         <div class="row">
-            <table class="table " style="font-size: 8px;">
+            <table class="table" style="font-size: 8px;">
                 <td>
-                    <br>
-                    <br>
-                    <span style="font-size:  10px !important; font-weight: bold !important;  ">__________________________________</span>
+                    <table style="font-size: 8px;">
+                        <tr>
+                            <td>Nom Refacción</td>
+                            <td>Precio</td>
+                            <td>Cantidad</td>
+                            <td>Nom Refacción</td>
+                            <td>Precio</td>
+                            <td>Cantidad</td>
+                            <td>Nom Refacción</td>
+                            <td>Precio</td>
+                            <td>Cantidad</td>
+                        </tr>
+                        @foreach($sparePart as $spare)
+                            <tr>
+                                <td>{{ $spare->name }}</td>
+                                <td>{{ $spare->priceOriginal }}</td>
+                                <td>{{ $spare->amount }}</td>
+                                <td>{{ $spare->name }}</td>
+                                <td>{{ $spare->priceGeneric }}</td>
+                                <td>{{ $spare->amount }}</td>
+                                <td>{{ $spare->name }}</td>
+                                <td>{{ $spare->priceUsed }}</td>
+                                <td>{{ $spare->amount }}</td>
+                            </tr>
+                        @endforeach
+                    </table>
+
+                    <span style="font-weight: bold !important;  "></span>Partes/refacciones Originales: $ {{ $vin_check_list->spare_parts }}</span>
                     <br>
                     
-                    <span style="font-size:  10px !important; font-weight: bold !important;  ">TECNICO CERTIFICADO POR GM</span>
+                    <span style="font-weight: bold !important;  "></span>Partes/refacciones Genéricas: $ {{ $sumGeneric }}</span>
                     <br>
                     
-                </td>
-                
-                <td>
-                    <br>
-                    <br>
-                    <span style="font-size:  10px !important; font-weight: bold !important;  ">_______________________________</span>
+                    <span style="font-weight: bold !important;  "></span>Partes/refacciones Usandas: $ {{ $sumUsed }}</span>
                     <br>
                     
-                    <span style="font-size:  10px !important; font-weight: bold !important;  ">GERENTE DE SEMINUEVOS</span>
-                    <br>
-                </td>
-                
-                <td>
-                    <br>
-                    <br>
-                    <span style="font-size:  10px !important; font-weight: bold !important;  ">_______________________________</span>
+                    <span style="font-weight: bold !important;  "></span>HyP: $ {{ $vin_check_list->hyp }}</span>
                     <br>
                     
-                    <span style="font-size:  10px !important; font-weight: bold !important;  ">VALUADOR - COMPRADOR</span>
+                    <span style="font-weight: bold !important;  "></span>Total: $ {{ $vin_check_list->total }}</span>
+                    <br>
+                    <span style="font-size:  10px !important; font-weight: bold !important;  ">Toma y Oferta Final:</span>
+                    <br>
+                    <span style="font-weight: bold !important;  "></span>Valor toma: $ {{ $vin_check_list->take_value }}</span>
+                    <br>
+                    
+                    <span style="font-weight: bold !important;  "></span>Oferta final: $ {{ $vin_check_list->final_offer }}</span>
                     <br>
                 </td>
             </table>
         </div>
+
 
     </div>
 </body>

@@ -67,6 +67,11 @@ class Spare_partController extends Controller
                     $spare_part->sell_your_car_id = $request->sell_your_car_id;
                     $spare_part->save();
 
+                    $isLastSparePart = $request->has('is_last') && $request->is_last === true;
+                    if ($isLastSparePart) {
+                        \EmailHelper::sendMailSpareParts('vguzman@chevroletbalderrama.com', $spare_part->name, $spare_part->amount, $spare_part->sell_your_car_id);
+                    }
+
                     $data = array(
                         'status' => 'success',
                         'code'   => '200',
