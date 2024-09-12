@@ -17,6 +17,7 @@ use App\Mail\Email_user;
 use App\Mail\Email_Financing;
 use App\Mail\Email_External_Valuation;
 use App\Mail\Email_Notification_Client;
+use App\Mail\Email_SpareParts;
 
 
 
@@ -238,5 +239,15 @@ class EmailHelper {
         // data status
         $data->status = $status;
         Mail::to($email)->send(new Email_Notification_Client($data));
+    }
+
+    public static function sendMailSpareParts(String $email, String $name, String $amount, String $sell_your_car_id)
+    {
+        $data = new \stdClass();
+        $data->email = $email;
+        $data->name = $name;
+        $data->amount = $amount;
+        $data->sell_your_car_id = $sell_your_car_id;
+        Mail::to($email)->send(new Email_SpareParts($data));
     }
 }
