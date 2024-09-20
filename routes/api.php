@@ -674,4 +674,6 @@ Route::middleware(['check.ip'])->group(function () {
 
     Route::put('request/{id}', [App\Http\Controllers\RequestController::class, 'update']);
     Route::delete('request/{id}', [App\Http\Controllers\RequestController::class, 'destroy']);
+
+    Route::get('getPrintById/{id}', [App\Http\Controllers\Check_ListController::class, 'getPrint_pdf']);
 });

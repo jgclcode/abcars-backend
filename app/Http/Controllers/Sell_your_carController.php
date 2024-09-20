@@ -17,7 +17,8 @@ class Sell_your_carController extends Controller
         $from = date("Y-m-d 00:00:00",strtotime(date("Y-m-d 00:00:00")."- 15 days")); 
         $to = date("Y-m-d 23:59:59");      
         //
-        $sell_your_car = Sell_your_car::where('status', '!=', 'inactive')
+        // $sell_your_car = Sell_your_car::where('status', '!=', 'inactive')
+        $sell_your_car = Sell_your_car::where('status', '!=', 'pre_approved')->where('vin', '!=', '00000000000000000')
                                     ->whereBetween('created_at', [$from, $to])
                                     ->with(['spare_parts' => function($table){
                                         $table->where('priceOriginal', '>=', 0) // >= 0 && 

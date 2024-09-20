@@ -708,6 +708,17 @@
                 <td>
                     <table style="font-size: 8px;">
                         <tr>
+                            <td>Original</td>
+                            <td></td>
+                            <td></td>
+                            <td>Genérica</td>
+                            <td></td>
+                            <td></td>
+                            <td>Usada/Reparada</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
                             <td>Nom Refacción</td>
                             <td>Precio</td>
                             <td>Cantidad</td>
@@ -733,13 +744,14 @@
                         @endforeach
                     </table>
 
-                    <span style="font-weight: bold !important;  "></span>Partes/refacciones Originales: $ {{ $vin_check_list->spare_parts }}</span>
+                    <!-- <span style="font-weight: bold !important;  "></span>Partes/refacciones Originales: $ {{ $vin_check_list->spare_parts }}</span> -->
+                    <span style="font-weight: bold !important;  "></span>Partes/refacciones Originales: $ {{ $sumOriginal }}</span>
                     <br>
                     
                     <span style="font-weight: bold !important;  "></span>Partes/refacciones Genéricas: $ {{ $sumGeneric }}</span>
                     <br>
                     
-                    <span style="font-weight: bold !important;  "></span>Partes/refacciones Usandas: $ {{ $sumUsed }}</span>
+                    <span style="font-weight: bold !important;  "></span>Partes/refacciones Usadas: $ {{ $sumUsed }}</span>
                     <br>
                     
                     <span style="font-weight: bold !important;  "></span>HyP: $ {{ $vin_check_list->hyp }}</span>
