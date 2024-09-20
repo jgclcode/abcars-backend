@@ -234,8 +234,15 @@ class Spare_partController extends Controller
         $sell_your_car_id = Sell_your_car::find($sell_your_car_id);
 
         if( is_object($sell_your_car_id) ){
+            $vin  = $sell_your_car_id->vin;
             $spare_parts = $sell_your_car_id->spare_parts()->get();
             $dist = $sell_your_car_id->check_list()->get();
+
+            $spare_parts = $spare_parts->map(function ($spare_part) use ($vin) {
+                $spare_part->vin = $vin;
+                return $spare_part;
+            });
+
             $data = array(
                 'code' => 200,
                 'status' => 'success',
