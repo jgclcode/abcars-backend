@@ -76,7 +76,7 @@ class RequestController extends Controller
                 $requests->save();
                   
                 #\EmailHelper::sendEmail_Request( $user->email, $user->name, $user->surname, $brand->name, $modelo->name, $request->year, $request->version, $request->release, $request->type_purchase, $request->amount_pay);
-                \EmailHelper::sendEmail_Request( $user->email, $user->name, $user->surname, $brand->name, $modelo->name, $request->year, $request->version);
+                // \EmailHelper::sendEmail_Request( $user->email, $user->name, $user->surname, $brand->name, $modelo->name, $request->year, $request->version);
 
                 $data = array(
                     'status' => 'success',
