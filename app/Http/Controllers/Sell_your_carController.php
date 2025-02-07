@@ -562,19 +562,19 @@ class Sell_your_carController extends Controller
         curl_close($ch);
 
         // Enviar mail a lesamaoyabi@gmail.com
-        if ($valuation_quote->subsidiary == 'puebla' || $valuation_quote->subsidiary == 'tlaxcala') {
-            \EmailHelper::sendMailExternalValuation('admon-seminuevos@chevroletbalderrama.com', $valuation_quote->userName, $valuation_quote->surname,
-                                            $valuation_quote->phone1, $valuation_quote->email,
-                                            $valuation_quote->brandName, $valuation_quote->carmodelName,
-                                            $valuation_quote->subsidiary, $valuation_quote->date, $valuation_quote->hour, $sell_your_car_id);
-        }
+        // if ($valuation_quote->subsidiary == 'puebla' || $valuation_quote->subsidiary == 'tlaxcala') {
+        //     \EmailHelper::sendMailExternalValuation('admon-seminuevos@chevroletbalderrama.com', $valuation_quote->userName, $valuation_quote->surname,
+        //                                     $valuation_quote->phone1, $valuation_quote->email,
+        //                                     $valuation_quote->brandName, $valuation_quote->carmodelName,
+        //                                     $valuation_quote->subsidiary, $valuation_quote->date, $valuation_quote->hour, $sell_your_car_id);
+        // }
 
-        if ($valuation_quote->subsidiary == 'pachuca') {
-            \EmailHelper::sendMailExternalValuation('admvecsaseminuevos@bmwvecsa.com', $valuation_quote->userName, $valuation_quote->surname,
-                                            $valuation_quote->phone1, $valuation_quote->email,
-                                            $valuation_quote->brandName, $valuation_quote->carmodelName,
-                                            $valuation_quote->subsidiary, $valuation_quote->date, $valuation_quote->hour, $sell_your_car_id);
-        }
+        // if ($valuation_quote->subsidiary == 'pachuca') {
+        //     \EmailHelper::sendMailExternalValuation('admvecsaseminuevos@bmwvecsa.com', $valuation_quote->userName, $valuation_quote->surname,
+        //                                     $valuation_quote->phone1, $valuation_quote->email,
+        //                                     $valuation_quote->brandName, $valuation_quote->carmodelName,
+        //                                     $valuation_quote->subsidiary, $valuation_quote->date, $valuation_quote->hour, $sell_your_car_id);
+        // }
         // Delete zappier array
         unset($zappier);
     }
