@@ -38,9 +38,13 @@ class ConversionFormController extends Controller
             'lastName'     => 'required|string|max:255',
             'email'        => 'required|string|max:255', 
             'phone'        => 'required|numeric',
-            'time'         => 'required|string|max:255',
-            'appointment'  => 'required|string|max:255',
-            'filial'       => 'required|string|max:255',
+            // 'time'         => 'required|string|max:255',
+            // 'appointment'  => 'required|string|max:255',
+            // 'filial'       => 'required|string|max:255',
+            'to_purchase' => 'required|string|max:255',
+            'type_purchase' => 'required|string|max:255',
+            'initial_investment' => 'required|numeric',
+            'profession' => 'required|string|max:255',
         ];
 
         try {
@@ -60,8 +64,8 @@ class ConversionFormController extends Controller
                 $conversion_form->lastName    = $body->lastName;
                 $conversion_form->phone       = $body->phone;
                 $conversion_form->email       = $body->email;
-                $conversion_form->appointment = ($body->appointment.' '.$body->time);
-                $conversion_form->filial      = $body->filial;
+                // $conversion_form->appointment = ($body->appointment.' '.$body->time);
+                $conversion_form->filial      = 'ABCars';
                 $conversion_form->save();
 
 
@@ -72,13 +76,18 @@ class ConversionFormController extends Controller
                     "lastName" => $body->lastName,
                     "phone" => $body->phone,
                     "email" => $body->email,
-                    "appointmentDate" => $body->appointment,
-                    "appointmentHour" => $body->time,
-                    "filial" => $body->filial
+
+                    'to_purchase' => $body->to_purchase,
+                    'type_purchase' => $body->type_purchase,
+                    'initial_investment' => $body->initial_investment,
+                    'profession' => $body->profession,
+                    // "appointmentDate" => $body->appointment,
+                    // "appointmentHour" => $body->time,
+                    // "filial" => $body->filial
                 );
                 
                 $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, "https://hooks.zapier.com/hooks/catch/8825119/3mimti7/");
+                curl_setopt($ch, CURLOPT_URL, "https://hooks.zapier.com/hooks/catch/8825119/2qjb9vg/");
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($ch, CURLOPT_POST, true);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($request));
